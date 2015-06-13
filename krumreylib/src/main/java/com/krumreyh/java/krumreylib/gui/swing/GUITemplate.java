@@ -16,7 +16,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * Class that extends Swing's JFrame and has methods that simplify the adding of
  * GUI objects.
  * @author Hermann Krumrey
- * @version 0.1
+ * @version 1.0
  */
 public class GUITemplate extends JFrame {
 	
