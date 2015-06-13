@@ -21,7 +21,7 @@ public class FileHandler {
 	 * @param fileName - the file to be checked as string
 	 * @return true if the file is a file, false otherwise
 	 */
-	protected boolean checkIfFile(String fileName) {
+	public static boolean checkIfFile(String fileName) {
 		File file = new File(fileName);
 		if (file.exists() && file.isFile()) {
 			return true;
@@ -35,7 +35,7 @@ public class FileHandler {
 	 * @param file - the file as a string
 	 * @return the file extension
 	 */
-	protected String getExtension(String file) {
+	public static String getExtension(String file) {
 		return file.substring(file.lastIndexOf(".") + 1);
 	}
 	
@@ -44,7 +44,7 @@ public class FileHandler {
 	 * @param file - the file to be checked
 	 * @return the file extension
 	 */
-	protected String getExtension(File file) {
+	public static String getExtension(File file) {
 		return getExtension(file.getName());
 	}
 	

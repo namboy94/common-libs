@@ -21,7 +21,7 @@ public class DirectoryHandler {
 	 * @param directory - the directory to be checked
 	 * @return - true if the directory exists, false otherwise
 	 */
-	protected boolean checkIfDirectory(String directory) {
+	public static boolean checkIfDirectory(String directory) {
 		File directoryFile = new File(directory);
 		if (directoryFile.exists() && directoryFile.isDirectory()) {
 			return true;
@@ -36,7 +36,7 @@ public class DirectoryHandler {
 	 * @return the directory including a seperator at the end
 	 * @throws IllegalArgumentException if the given parameter is not a valid directory
 	 */
-	protected String addLastSeperator(String directory) throws IllegalArgumentException{
+	public static String addLastSeperator(String directory) throws IllegalArgumentException{
 		if (!checkIfDirectory(directory)) { throw new IllegalArgumentException("Not a directory"); }
 		if (directory.endsWith("/") || directory.endsWith("\\")) {
 			return directory;
@@ -53,7 +53,7 @@ public class DirectoryHandler {
 	 * @return the directory as File
 	 * @throws IllegalArgumentException - in case the string is not a directory
 	 */
-	protected File StringToDirectoryFile(String directory) throws IllegalArgumentException {
+	public static File StringToDirectoryFile(String directory) throws IllegalArgumentException {
 		directory = addLastSeperator(directory);
 		return new File(directory);
 	}
