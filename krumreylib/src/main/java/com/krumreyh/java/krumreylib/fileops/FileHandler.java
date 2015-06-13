@@ -18,16 +18,46 @@ public class FileHandler {
 	
 	/**
 	 * Checks if a file is a file in the filesystem
-	 * @param fileName - the file to be checked as string
+	 * @param fileName - the file to be checked
 	 * @return true if the file is a file, false otherwise
 	 */
-	public static boolean checkIfFile(String fileName) {
-		File file = new File(fileName);
+	public static boolean checkIfFile(File file) {
 		if (file.exists() && file.isFile()) {
 			return true;
 		} else {
 			return false;
 		}
+	}
+	
+	/**
+	 * Overloads the checkIfFile method to check a string instead of a File object
+	 * @param file - the file as string
+	 * @return true, if the file exists an is a file, false otherwise
+	 */
+	public static boolean checkifFile(String file) {
+		return checkIfFile(new File(file));
+	}
+	
+	/**
+	 * Checks if a file is a directory
+	 * @param directory - the directory to be checked
+	 * @return true if the directory exists and is a directory, false otherwise
+	 */
+	public static boolean checkIfDirectory(File directory) {
+		if (directory.exists() && directory.isDirectory()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	/**
+	 * Overloads checkIfDirectory to check a directory given as a String
+	 * @param directory - the directory to be checked
+	 * @return true if the directory exists and is a directory, false otherwise
+	 */
+	public static boolean checkIfDirectory(String directory) {
+		return checkIfDirectory(new File(directory));
 	}
 	
 	/**
@@ -46,6 +76,23 @@ public class FileHandler {
 	 */
 	public static String getExtension(File file) {
 		return getExtension(file.getName());
+	}
+	
+	/**
+	 * Checks a String for illegal (at least under Windows) characters, removes them, and returns
+	 * the result. The original file name is not modified.
+	 * @param fileName - the file to be checked for illegal characters
+	 * @return the sanitized file name
+	 */
+	public static String sanitizeFileName(String fileName) {
+		String newFileName = fileName;
+		char[] illegalCharacters =  {'<', '>', ':', '\"', '/', '\\', '|', '?', '*'};
+		for (int i = 0; i < illegalCharacters.length; i++) {
+			if (fileName.indexOf(illegalCharacters[i]) != -1) {
+				 newFileName = newFileName.replace("" + illegalCharacters[i], "");
+			}
+		}
+		return newFileName;
 	}
 	
 }
