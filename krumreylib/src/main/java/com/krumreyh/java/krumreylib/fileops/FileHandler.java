@@ -1,6 +1,7 @@
 package com.krumreyh.java.krumreylib.fileops;
 
 import java.io.File;
+import java.util.Arrays;
 
 /**
  * Class that handles file operations
@@ -122,4 +123,54 @@ public class FileHandler {
 		file.renameTo(new File(path + sanitizedNewName + "." + extension));
 	}
 
+	/**
+	 * Returns an alphabetically sorted Array of Files that are contained in the
+	 * given directory 
+	 * @param directory - the directory which's content should be turned into a File array
+	 * @return the sorted array of Files
+	 */
+	public static File[] getDirectoryContent(File directory) {
+		File[] listOfFiles = directory.listFiles();
+		Arrays.sort(listOfFiles);
+		return listOfFiles;
+	}
+	
+	/**
+	 * Overloads getDirectoryContent(File) to be useable with a String as well.
+	 * @param directory - the directory which's content should be turned into a File array
+	 * @return the directory's content as File array
+	 */
+	public static File[] getDirectoryContent(String directory) {
+		return getDirectoryContent(new File(directory));
+	}
+	
+	/**
+	 * Retrieves the pure file name of a file without its extension
+	 * @param file - the file to be used
+	 * @return the pure file name as string
+	 */
+	public static String getPureFileName(File file) {
+		String fileName = file.getName();
+		String fileExtension = getExtension(file);
+		String[] extensionSplit = fileName.split(fileExtension);
+		String pureName = "";
+		
+		if (extensionSplit.length == 1) {
+			pureName = extensionSplit[0];
+		} else {
+			for (int i = 0; i < extensionSplit.length - 1; i++) {
+				pureName += extensionSplit[i];
+			}
+		}
+		return pureName;
+	}
+	
+	/**
+	 * Overloads getPureFileName(File) to be compatible with strings
+	 * @param file - the file to be checked as string
+	 * @return the pure file name without extension or file path
+	 */
+	public static String getPureFileName(String file) {
+		return getPureFileName(new File(file));
+	}
 }
