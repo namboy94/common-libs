@@ -95,4 +95,30 @@ public class FileHandler {
 		return newFileName;
 	}
 	
+	/**
+	 * Establishes if either a Windows-like filesystem is used (with \ as seperator)
+	 * or a UNIX-based filesystem (with / as seperator) and returns a seperator as string.
+	 * @param fileName - the filename to be checked
+	 * @return the seperator used on this system
+	 */
+	public static String getDivider(String fileName) {
+		if (fileName.contains("/")) {
+			return "/";
+		} else {
+			return "\\";
+		}
+	}
+	
+	/**
+	 * Method that renames a file.
+	 * @param file - the file to be renamed
+	 * @param newName - the new file name, without an extension
+	 */
+	public static void renameFile(File file, String newName) {
+		String extension = getExtension(file.getName());
+		String path = file.getParentFile().getAbsolutePath();
+		path += getDivider(path);
+		file.renameTo(new File(path + newName + "." + extension));
+	}
+
 }
