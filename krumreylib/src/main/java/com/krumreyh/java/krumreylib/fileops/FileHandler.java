@@ -115,10 +115,11 @@ public class FileHandler {
 	 * @param newName - the new file name, without an extension
 	 */
 	public static void renameFile(File file, String newName) {
+		String sanitizedNewName = sanitizeFileName(newName);
 		String extension = getExtension(file.getName());
 		String path = file.getParentFile().getAbsolutePath();
 		path += getDivider(path);
-		file.renameTo(new File(path + newName + "." + extension));
+		file.renameTo(new File(path + sanitizedNewName + "." + extension));
 	}
 
 }
