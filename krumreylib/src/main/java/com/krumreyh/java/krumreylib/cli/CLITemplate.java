@@ -1,8 +1,6 @@
 package com.krumreyh.java.krumreylib.cli;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 /**
  * Class that models a basic CLI
@@ -31,17 +29,10 @@ public class CLITemplate {
 		if (firstCommand != null) { overRide = true; }
 		this.running = true;
 		while (running) {
-			BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 			String userInput = "";
 			this.hasRun = false;
 			if (overRide) { userInput = firstCommand; overRide = false; }
-			else {
-				try {
-					userInput = in.readLine();
-				} catch (IOException e) {
-					System.out.println("Error parsing user input from CLI");
-				}
-			}
+			else { userInput = TerminalParser.getUserInput(); }
 			for (int i = 0; i < commands.length; i++) {
 				commands[i].run(userInput);
 			}
@@ -141,6 +132,13 @@ public class CLITemplate {
 	 * @author Hermann Krumrey
 	 */
 	protected class HelpCommand implements CLICommand {
+		
+		/**
+		 * public constructor
+		 */
+		public HelpCommand() {
+		}
+		
 		/**
 		 * The command
 		 */
@@ -157,6 +155,13 @@ public class CLITemplate {
 	 * @author Hermann Krumrey
 	 */
 	protected class QuitCommand implements CLICommand {
+		
+		/**
+		 * public constructor
+		 */
+		public QuitCommand() {
+		}
+
 		/**
 		 * The command
 		 */

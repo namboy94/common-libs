@@ -152,7 +152,7 @@ public class FileHandler {
 	public static String getPureFileName(File file) {
 		String fileName = file.getName();
 		String fileExtension = getExtension(file);
-		String[] extensionSplit = fileName.split(fileExtension);
+		String[] extensionSplit = fileName.split("." + fileExtension);
 		String pureName = "";
 		
 		if (extensionSplit.length == 1) {
