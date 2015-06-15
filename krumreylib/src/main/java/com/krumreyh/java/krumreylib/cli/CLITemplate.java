@@ -11,35 +11,41 @@ import java.io.InputStreamReader;
  */
 public class CLITemplate {
 	
-	protected Command[] commands;
+	protected Command[] commands = new Command[0];
 	protected boolean running;
+	protected boolean hasRun;
 	
 	/**
 	 * Constructor for the class
 	 */
 	public CLITemplate() {
-		commands = new Command[0];
 	}
 	
 	/**
 	 * Starts the CLI
+	 * @param firstCommand - overrides the first command run. Enter null if this should not be the case
 	 * @throws IOException - In/Out Exception
 	 */
-	public void start(){
+	public void start(String firstCommand){
+		boolean overRide = false;
+		if (firstCommand != null) { overRide = true; }
 		this.running = true;
 		while (running) {
 			BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 			String userInput = "";
-			boolean hasRun = false;
-			try {
-				userInput = in.readLine();
-			} catch (IOException e) {
-				System.out.println("Error parsing user input from CLI");
+			this.hasRun = false;
+			if (overRide) { userInput = firstCommand; overRide = false; }
+			else {
+				try {
+					userInput = in.readLine();
+				} catch (IOException e) {
+					System.out.println("Error parsing user input from CLI");
+				}
 			}
 			for (int i = 0; i < commands.length; i++) {
-				commands[i].run(userInput, hasRun);
+				commands[i].run(userInput);
 			}
-			if (!hasRun) { System.out.println("\nError, command not understood\n"); }
+			if (!this.hasRun) { System.out.println("\nError, command not understood\n"); }
 		}
 	}
 	
@@ -89,13 +95,17 @@ public class CLITemplate {
 		 * parses a user's input and executes the command if a match is found
 		 * @param userInput
 		 */
-		public void run(String userInput, boolean hasRun) {
+		public void run(String userInput) {
 			switch (this.commandType) {
-			case STRING:	if (userInput.equals(this.regex)) { this.command.execute(); }
-							hasRun = true;
+			case STRING:	if (userInput.equals(this.regex)) {
+							this.command.execute();
+							CLITemplate.this.hasRun = true;
+							}
 							break;
-			case REGEX:		if (userInput.matches(this.regex)) { this.command.execute(); }
-							hasRun = true;
+			case REGEX:		if (userInput.matches(this.regex)) {
+							this.command.execute();
+							CLITemplate.this.hasRun = true;
+							}
 							break;
 			default:		
 			}
@@ -139,6 +149,19 @@ public class CLITemplate {
 			for (int i = 0; i < commands.length; i++) {
 				System.out.println("\n" + commands[i].getName() + "\n" + commands[i].getDescription() + "\n");
 			}
+		}
+	}
+	
+	/**
+	 * Class that implements a command which terminates the program
+	 * @author Hermann Krumrey
+	 */
+	protected class QuitCommand implements CLICommand {
+		/**
+		 * The command
+		 */
+		public void execute() {
+			CLITemplate.this.running = false;
 		}
 	}
 	

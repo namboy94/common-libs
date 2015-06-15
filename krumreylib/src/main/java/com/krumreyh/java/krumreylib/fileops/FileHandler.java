@@ -35,7 +35,7 @@ public class FileHandler {
 	 * @param file - the file as string
 	 * @return true, if the file exists an is a file, false otherwise
 	 */
-	public static boolean checkifFile(String file) {
+	public static boolean checkIfFile(String file) {
 		return checkIfFile(new File(file));
 	}
 	
