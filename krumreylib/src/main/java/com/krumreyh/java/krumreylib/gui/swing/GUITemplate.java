@@ -1,5 +1,6 @@
 package com.krumreyh.java.krumreylib.gui.swing;
 
+import java.awt.Checkbox;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -79,6 +80,23 @@ public class GUITemplate extends JFrame {
 		label.setSize(width, height);
 		this.add(label);
 		return label;
+	}
+	
+	/**
+	 * Adds a checkbox to the GUI
+	 * @param text - the text to be displayed next to the checkbox
+	 * @param xPos - the position on the x axis of the window
+	 * @param yPos - the position on the y axis of the window
+	 * @param width - the width of the checkbox
+	 * @param height - the height of the checkbox
+	 * @return
+	 */
+	protected Checkbox addCheckBox(String text, int xPos, int yPos, int width, int height) {
+		Checkbox checkbox = new Checkbox(text);
+		checkbox.setLocation(xPos, yPos);
+		checkbox.setSize(width, height);
+		this.add(checkbox);
+		return checkbox;
 	}
 	
 	
