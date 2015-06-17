@@ -1,12 +1,15 @@
 package com.krumreyh.java.krumreylib.gui.swing;
 
 import java.awt.Checkbox;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -137,6 +140,36 @@ public class GUITemplate extends JFrame {
 	}
 	
 	/**
+	 * Changes the appearance of a JComponent
+	 * @param component - the component whose appearance should be changed
+	 * @param fontSize - the new font size
+	 * @param fontStyle - the new font style
+	 * @param fontType - the new font type
+	 * @param backGround - the new background
+	 * @param foreGround - the new foreground
+	 */
+	protected void changeComponentAppearance(JComponent component, int fontSize, int fontStyle, String fontType, Color backGround, Color foreGround) {
+		component.setFont(new Font(fontType, fontStyle, fontSize));
+		component.setBackground(backGround);
+		component.setForeground(foreGround);
+	}
+	
+	/**
+	 * Changes the appearance of multiple JComponents
+	 * @param component - the component whose appearance should be changed
+	 * @param fontSize - the new font size
+	 * @param fontStyle - the new font style
+	 * @param fontType - the new font type
+	 * @param backGround - the new background
+	 * @param foreGround - the new foreground
+	 */
+	protected void changeComponentAppearance(JComponent[] components, int fontSize, int fontStyle, String fontType, Color backGround, Color foreGround) {
+		for (int i = 0; i < components.length; i++) {
+			changeComponentAppearance(components[i], fontSize, fontStyle, fontType, backGround, foreGround);
+		}
+	}
+
+	/**
 	 * Class that implements an ActionListener that opens a file open/load dialog
 	 */
 	protected class LoadSaveDialog implements ActionListener {
@@ -173,3 +206,5 @@ public class GUITemplate extends JFrame {
 		}
 	}
 }
+
+//TODO Use Vererbung with JComponent where possible

@@ -111,6 +111,20 @@ public class FileHandler {
 	}
 	
 	/**
+	 * Establishes if either a Windows-like filesystem is used (with \ as seperator)
+	 * or a UNIX-based filesystem (with / as seperator) and returns a seperator as string.
+	 * @param file - the file to be checked
+	 * @return the seperator used on this system
+	 */
+	public static String getDivider(File file) {
+		if (file.getAbsolutePath().contains("/")) {
+			return "/";
+		} else {
+			return "\\";
+		}
+	}
+	
+	/**
 	 * Method that renames a file.
 	 * @param file - the file to be renamed
 	 * @param newName - the new file name, without an extension
@@ -172,5 +186,15 @@ public class FileHandler {
 	 */
 	public static String getPureFileName(String file) {
 		return getPureFileName(new File(file));
+	}
+	
+	public static boolean hasChildren(String directory) {
+		if (getDirectoryContent(directory).length == 0) { return false; }
+		else { return true; }
+	}
+	
+	public static boolean hasChildren(File directory) {
+		if (getDirectoryContent(directory).length == 0) { return false; }
+		else { return true; }
 	}
 }
