@@ -13,6 +13,7 @@ import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -171,6 +172,37 @@ public class GUITemplate extends JFrame {
 		}
 	}
 
+	/**
+	 * Opens a new popup message contining a short message
+	 * @param message - the text to be displayed in the message box
+	 */
+	protected void showPopUpMessage(String message) {
+		JOptionPane.showMessageDialog(this, message);
+	}
+	
+	/**
+	 * Starts a new Confirmation dialog
+	 * @param message - the message to be displayed
+	 * @param title - the  title of the confirmation dialog box
+	 * @return true, if the user entered OK, false otherwise
+	 */
+	protected boolean showConfirmationDialog(String message, String title) {
+		int confirmed = JOptionPane.YES_NO_OPTION;
+		confirmed = JOptionPane.showConfirmDialog(this, message, title, confirmed);
+		return (confirmed == 0);
+	}
+	
+	/**
+	 * Shows an input dialog box
+	 * @param title - the title of the inputbox
+	 * @param message - the message to be displayed to the user
+	 * @return the input string (by the user)
+	 */
+	protected String showInputDialog(String title, String message) {
+		JFrame frame = new JFrame(title);
+		return JOptionPane.showInputDialog(frame, message);
+	}
+	
 	/**
 	 * Class that implements an ActionListener that opens a file open/load dialog
 	 */
