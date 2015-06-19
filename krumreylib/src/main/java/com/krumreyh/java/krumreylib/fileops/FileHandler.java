@@ -1,6 +1,9 @@
 package com.krumreyh.java.krumreylib.fileops;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.Arrays;
 
 /**
@@ -233,5 +236,27 @@ public class FileHandler {
 	 */
 	public static boolean hasChildren(String directory) {
 		return hasChildren(new File(directory));
+	}
+	
+	/**
+	 * Copies a resource from inside the Java Application and copies it to a file outside of the application
+	 * @param resource - the resource to be copied as File
+	 * @param destination - the destination of the resource
+	 */
+	public static void copyResource(String resource, File destination) {
+		InputStream stream = FileHandler.class.getClass().getResourceAsStream(resource);
+		try {
+			Files.copy(stream, destination.toPath());
+		} catch (IOException e) {
+		}
+	}
+	
+	/**
+	 * Copies a resource from inside the Java Application and copies it to a file outside of the application
+	 * @param resource - the resource to be copied as string
+	 * @param destination - the destination of the resource
+	 */
+	public static void copyResource(String resource, String destination) {
+		copyResource(resource, new File(destination));
 	}
 }
