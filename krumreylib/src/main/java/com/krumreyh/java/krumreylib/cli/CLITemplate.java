@@ -1,7 +1,5 @@
 package com.krumreyh.java.krumreylib.cli;
 
-import java.io.IOException;
-
 /**
  * Class that models a basic CLI
  * @author Hermann Krumrey
@@ -24,19 +22,26 @@ public class CLITemplate {
 	 * @param firstCommand - overrides the first command run. Enter null if this should not be the case
 	 * @throws IOException - In/Out Exception
 	 */
-	public void start(String firstCommand){
+	public void start(String firstCommand) {
 		boolean overRide = false;
-		if (firstCommand != null) { overRide = true; }
+		if (firstCommand != null) {
+			overRide = true;
+		}
 		this.running = true;
 		while (running) {
 			String userInput = "";
 			this.hasRun = false;
-			if (overRide) { userInput = firstCommand; overRide = false; }
-			else { userInput = TerminalParser.getUserInput(); }
+			if (overRide) {
+				userInput = firstCommand; overRide = false;
+			} else {
+				userInput = TerminalParser.getUserInput();
+			}
 			for (int i = 0; i < commands.length; i++) {
 				commands[i].run(userInput);
 			}
-			if (!this.hasRun) { System.out.println("\nError, command not understood\n"); }
+			if (!this.hasRun) {
+				System.out.println("\nError, command not understood\n");
+			}
 		}
 	}
 	
@@ -45,8 +50,11 @@ public class CLITemplate {
 	 * @param regex - the regex or string that leads to this command
 	 * @param command - the command to be executed
 	 * @param commandType - STRING (full comparison) or REGEX (regular expression comparison)
+	 * @param name - the name to be displayed by the "help"-command
+	 * @param description - the description to be displayed by the "help"-command
 	 */
-	protected void addCommand(String regex, CLICommand command, CommandType commandType, String name, String description) {
+	protected void addCommand(String regex, CLICommand command, CommandType commandType,
+														String name, String description) {
 		Command[] extendedArray = new Command[this.commands.length + 1];
 		for (int i = 0; i < this.commands.length; i++) {
 			extendedArray[i] = this.commands[i];

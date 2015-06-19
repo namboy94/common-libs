@@ -92,7 +92,7 @@ public class GUITemplate extends JFrame {
 	 * @param yPos - the position on the y axis of the window
 	 * @param width - the width of the checkbox
 	 * @param height - the height of the checkbox
-	 * @return
+	 * @return the Checkbox object in case it's needed later on
 	 */
 	protected Checkbox addCheckBox(String text, int xPos, int yPos, int width, int height) {
 		Checkbox checkbox = new Checkbox(text);
@@ -148,7 +148,8 @@ public class GUITemplate extends JFrame {
 	 * @param backGround - the new background
 	 * @param foreGround - the new foreground
 	 */
-	protected void changeComponentAppearance(JComponent component, int fontSize, int fontStyle, String fontType, Color backGround, Color foreGround) {
+	protected void changeComponentAppearance(JComponent component, int fontSize, int fontStyle, String fontType,
+																			Color backGround, Color foreGround) {
 		component.setFont(new Font(fontType, fontStyle, fontSize));
 		component.setBackground(backGround);
 		component.setForeground(foreGround);
@@ -156,14 +157,15 @@ public class GUITemplate extends JFrame {
 	
 	/**
 	 * Changes the appearance of multiple JComponents
-	 * @param component - the component whose appearance should be changed
+	 * @param components - the component whose appearance should be changed
 	 * @param fontSize - the new font size
 	 * @param fontStyle - the new font style
 	 * @param fontType - the new font type
 	 * @param backGround - the new background
 	 * @param foreGround - the new foreground
 	 */
-	protected void changeComponentAppearance(JComponent[] components, int fontSize, int fontStyle, String fontType, Color backGround, Color foreGround) {
+	protected void changeComponentAppearance(JComponent[] components, int fontSize, int fontStyle, String fontType,
+																			Color backGround, Color foreGround) {
 		for (int i = 0; i < components.length; i++) {
 			changeComponentAppearance(components[i], fontSize, fontStyle, fontType, backGround, foreGround);
 		}
@@ -179,12 +181,23 @@ public class GUITemplate extends JFrame {
 		private String type;
 		
 		//TODO Replace String with enum for load or save
+		/**
+		 * Constructor that defines the settings for the save/load dialog
+		 * @param allowedFileTypes - the allowed file types as a String array
+		 * @param dialogMessage - the dialog message to be displayed
+		 * @param type - the type of dialog - load or save
+		 */
 		public LoadSaveDialog(String[] allowedFileTypes, String dialogMessage, String type) {
 			this.allowedFileTypes = allowedFileTypes;
 			this.dialogMessage = dialogMessage;
 			this.type = type;
 		}
 		
+		/**
+		 * The action performed by the button press
+		 * Opens a new Save/Load Dialog
+		 * @param e - the button-press event
+		 */
 		public void actionPerformed(ActionEvent e) {
 			JFileChooser chooser = new JFileChooser();
 			//TODO Find a way for variable amount of file extensions in filter
@@ -199,6 +212,7 @@ public class GUITemplate extends JFrame {
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				if (this.type.toLowerCase().equals("save")) {
 					//TODO Figure out how to save something
+					System.out.println("");
 				} else if (this.type.toLowerCase().equals("load")) {
 					GUITemplate.this.currentFile =  chooser.getSelectedFile();
 				}

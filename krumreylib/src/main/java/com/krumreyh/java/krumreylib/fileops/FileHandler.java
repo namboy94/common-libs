@@ -19,15 +19,11 @@ public class FileHandler {
 	
 	/**
 	 * Checks if a file is a file in the filesystem
-	 * @param fileName - the file to be checked
+	 * @param file - the file to be checked
 	 * @return true if the file is a file, false otherwise
 	 */
 	public static boolean checkIfFile(File file) {
-		if (file.exists() && file.isFile()) {
-			return true;
-		} else {
-			return false;
-		}
+		return (file.exists() && file.isFile());
 	}
 	
 	/**
@@ -45,11 +41,7 @@ public class FileHandler {
 	 * @return true if the directory exists and is a directory, false otherwise
 	 */
 	public static boolean checkIfDirectory(File directory) {
-		if (directory.exists() && directory.isDirectory()) {
-			return true;
-		} else {
-			return false;
-		}
+		return (directory.exists() && directory.isDirectory());
 	}
 	
 	/**
@@ -141,12 +133,16 @@ public class FileHandler {
 	 * Returns an alphabetically sorted Array of Files that are contained in the
 	 * given directory 
 	 * @param directory - the directory which's content should be turned into a File array
-	 * @return the sorted array of Files
+	 * @return the sorted array of Files, an empty File array if there are no children
 	 */
 	public static File[] getDirectoryContent(File directory) {
 		File[] listOfFiles = directory.listFiles();
-		Arrays.sort(listOfFiles);
-		return listOfFiles;
+		if (listOfFiles != null) {
+			Arrays.sort(listOfFiles);
+			return listOfFiles;
+		} else {
+			return new File[0];
+		}
 	}
 	
 	/**
@@ -156,6 +152,39 @@ public class FileHandler {
 	 */
 	public static File[] getDirectoryContent(String directory) {
 		return getDirectoryContent(new File(directory));
+	}
+	
+	/**
+	 * Returns All child directories of a directory
+	 * @param directory - the directory whose child directories should be returned
+	 * @return the directory's children directories
+	 */
+	public static File[] getChildrenDirectories(File directory) {
+		File[] allChildren = getDirectoryContent(directory);
+		int amountOfDirectories = 0;
+		for (int i = 0; i < allChildren.length; i++) {
+			if (checkIfDirectory(allChildren[i])) {
+				amountOfDirectories++;
+			}
+		}
+		File[] directories = new File[amountOfDirectories];
+		int j = 0;
+		for (int i = 0; i < allChildren.length; i++) {
+			if (checkIfDirectory(allChildren[i])) {
+				directories[j] = allChildren[i];
+				j++;
+			}
+		}
+		return directories;
+	}
+	
+	/**
+	 * Returns All child directories of a directory
+	 * @param directory - the directory whose child directories should be returned
+	 * @return the directory's children directories
+	 */
+	public static File[] getChildrenDirectories(String directory) {
+		return getChildrenDirectories(new File(directory));
 	}
 	
 	/**
@@ -188,13 +217,21 @@ public class FileHandler {
 		return getPureFileName(new File(file));
 	}
 	
-	public static boolean hasChildren(String directory) {
-		if (getDirectoryContent(directory).length == 0) { return false; }
-		else { return true; }
+	/**
+	 * Checks if a directory has children
+	 * @param directory - the directory to be checked
+	 * @return true, if the directory has children, false otherwise
+	 */
+	public static boolean hasChildren(File directory) {
+		return !(getDirectoryContent(directory).length == 0);
 	}
 	
-	public static boolean hasChildren(File directory) {
-		if (getDirectoryContent(directory).length == 0) { return false; }
-		else { return true; }
+	/**
+	 * Checks if a directory has children
+	 * @param directory - the directory to be checked
+	 * @return true, if the directory has children, false otherwise
+	 */
+	public static boolean hasChildren(String directory) {
+		return hasChildren(new File(directory));
 	}
 }

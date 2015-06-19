@@ -1,6 +1,7 @@
 package com.krumreyh.java.krumreylib.fileops;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
+import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 
@@ -43,7 +44,9 @@ public class FileHandlerTest {
 	public void testRename() {
 		FileHandler.renameFile(this.testFile, "testFileRenamed");
 		File newFile = new File("src/test/resources/testFileRenamed.txt");
-		if (!FileHandler.checkIfFile(newFile)) { fail(); }
+		if (!FileHandler.checkIfFile(newFile)) {
+			fail();
+		}
 		FileHandler.renameFile(newFile, "testFile");
 		assertEquals(this.testFile.getName(), "testFile.txt");
 	}
