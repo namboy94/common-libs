@@ -2,6 +2,7 @@ package com.krumreyh.java.krumreylib.gui.swing;
 
 import java.awt.Checkbox;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
@@ -57,10 +58,11 @@ public class GUITemplate extends JFrame {
 									LayoutManager layoutManager, int closeOp, boolean resizable) {
 		this.setTitle(title);
 		this.setLocation(xLocation, yLocation);
-		this.setSize(xSize, ySize);
+		this.getContentPane().setPreferredSize(new Dimension(xSize, ySize));
 		this.setLayout(layoutManager);
 		this.setDefaultCloseOperation(closeOp);
 		this.setResizable(resizable);
+		this.pack();
 	}
 	
 	/**
