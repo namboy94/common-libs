@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -138,6 +139,23 @@ public class GUITemplate extends JFrame {
 		button.addActionListener(listener);
 		this.add(button);
 		return button;
+	}
+	
+	/**
+	 * Adds a dropdown menu to the GUI. It provides String selection.
+	 * @param entries - the entries in the dropdown menu
+	 * @param xPos - the x position of the item
+	 * @param yPos - the y position of the item
+	 * @param width - the width of the item
+	 * @param height - the height of the item
+	 * @return the created dropdown menu in case it is used later on in the program
+	 */
+	protected JComboBox<String> addDropDownMenu(String[] entries, int xPos, int yPos, int width, int height) {
+		JComboBox<String> dropDown = new JComboBox<String>(entries);
+		dropDown.setLocation(xPos, yPos);
+		dropDown.setSize(width, height);
+		this.add(dropDown);
+		return dropDown;
 	}
 	
 	/**
