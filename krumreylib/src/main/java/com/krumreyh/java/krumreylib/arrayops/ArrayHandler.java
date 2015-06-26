@@ -29,11 +29,5 @@ public class ArrayHandler {
 		return extendedArray;
 	}
 	
-	public static Object[] extendArray(int extender, Object[] array) {
-		Object[] extended = new Object[array.length + extender];
-		for (int i = 0; i < array.length; i++) {
-			extended[i] = array[i];
-		}
-		return extended;
-	}
+	//TODO Read up on Generics
 }
