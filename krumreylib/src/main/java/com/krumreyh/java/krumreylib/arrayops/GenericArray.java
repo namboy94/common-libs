@@ -9,6 +9,7 @@ package com.krumreyh.java.krumreylib.arrayops;
 public class GenericArray<T1> {
 
 	private T1[] array;
+	private int last;
 	
 	/**
 	 * 
@@ -16,6 +17,7 @@ public class GenericArray<T1> {
 	 */
 	public GenericArray(T1[] array) {
 		this.array = array;
+		this.last = array.length - 1;
 	}
 	
 	/**
@@ -23,6 +25,7 @@ public class GenericArray<T1> {
 	 * @param extender
 	 */
 	public void extendArray(int extender) {
+		@SuppressWarnings("unchecked")
 		T1[] extendedArray = (T1[]) new Object[this.array.length + extender];
 		for (int i = 0; i < this.array.length; i++) {
 			extendedArray[i] = this.array[i];
@@ -37,5 +40,25 @@ public class GenericArray<T1> {
 	 */
 	public T1 getElement(int index) {
 		return this.array[index];
+	}
+	
+	/**
+	 * 
+	 * @param newElement
+	 */
+	public void pushBack(T1 newElement) {
+		if (this.last == this.array.length - 1) {
+			extendArray(1);
+		}
+		this.last++;
+		this.array[this.last] = newElement;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public int length() {
+		return this.last + 1;
 	}
 }
