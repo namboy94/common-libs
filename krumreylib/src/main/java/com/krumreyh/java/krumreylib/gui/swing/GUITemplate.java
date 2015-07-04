@@ -2,6 +2,7 @@ package com.krumreyh.java.krumreylib.gui.swing;
 
 import java.awt.Checkbox;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.LayoutManager;
@@ -221,6 +222,13 @@ public class GUITemplate extends JFrame {
 	protected String showInputDialog(String title, String message) {
 		JFrame frame = new JFrame(title);
 		return JOptionPane.showInputDialog(frame, message);
+	}
+	
+	protected void setGUIStyle(int fontSize, int fontStyle, String fontType, Color backGround, Color foreGround) {
+		int componentAmount = this.getComponentCount();
+		for (int i = 0; i < componentAmount; i++) {
+			this.changeComponentAppearance((JComponent)this.getComponent(i), fontSize, fontStyle, fontType, backGround, foreGround);
+		}
 	}
 	
 	/**

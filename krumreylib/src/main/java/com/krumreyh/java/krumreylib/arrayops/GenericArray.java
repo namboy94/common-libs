@@ -13,6 +13,15 @@ public class GenericArray<T1> {
 	
 	/**
 	 * 
+	 */
+	@SuppressWarnings("unchecked")
+	public GenericArray() {
+		this.array = (T1[])new Object[0];
+		this.last = -1;
+	}
+	
+	/**
+	 * 
 	 * @param array
 	 */
 	public GenericArray(T1[] array) {
@@ -24,12 +33,13 @@ public class GenericArray<T1> {
 	 * 
 	 * @param extender
 	 */
-	public void extendArray(int extender) {
+	public void extend(int extender) {
 		@SuppressWarnings("unchecked")
 		T1[] extendedArray = (T1[]) new Object[this.array.length + extender];
 		for (int i = 0; i < this.array.length; i++) {
 			extendedArray[i] = this.array[i];
 		}
+		this.last += extender;
 		this.array = extendedArray;
 	}
 	
@@ -42,13 +52,20 @@ public class GenericArray<T1> {
 		return this.array[index];
 	}
 	
+	public void setElement(int index, T1 newElement) {
+		if (index > last) {
+			this.extend(index - last);
+		}
+		this.array[index] = newElement;
+	}
+	
 	/**
 	 * 
 	 * @param newElement
 	 */
 	public void pushBack(T1 newElement) {
 		if (this.last == this.array.length - 1) {
-			extendArray(1);
+			extend(1);
 		}
 		this.last++;
 		this.array[this.last] = newElement;

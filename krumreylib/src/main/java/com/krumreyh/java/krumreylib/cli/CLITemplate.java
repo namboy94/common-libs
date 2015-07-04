@@ -153,7 +153,7 @@ public class CLITemplate {
 		public void execute() {
 			Command[] commands = CLITemplate.this.commands;
 			for (int i = 0; i < commands.length; i++) {
-				System.out.println("\n" + commands[i].getName() + "\n" + commands[i].getDescription() + "\n");
+				System.out.println("\n" + commands[i].getName() + "\n" + commands[i].getDescription());
 			}
 		}
 	}
