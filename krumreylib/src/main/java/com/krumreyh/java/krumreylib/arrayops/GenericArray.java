@@ -67,7 +67,6 @@ public class GenericArray<T1> {
 		if (this.last == this.array.length - 1) {
 			extend(1);
 		}
-		this.last++;
 		this.array[this.last] = newElement;
 	}
 	

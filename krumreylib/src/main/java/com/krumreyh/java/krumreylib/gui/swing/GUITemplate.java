@@ -2,23 +2,20 @@ package com.krumreyh.java.krumreylib.gui.swing;
 
 import java.awt.Checkbox;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.LayoutManager;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.filechooser.FileNameExtensionFilter;
+
+import com.krumreyh.java.krumreylib.arrayops.GenericArray;
 
 /**
  * Class that extends Swing's JFrame and has methods that simplify the adding of
@@ -28,7 +25,13 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class GUITemplate extends JFrame {
 	
-	protected File currentFile;
+	@SuppressWarnings("rawtypes")
+	private GenericArray<GenericArray> components = new GenericArray<GenericArray>();
+	private GenericArray<JLabel> labels = new GenericArray<JLabel>();
+	private GenericArray<JButton> buttons = new GenericArray<JButton>();
+	private GenericArray<Checkbox> checkBoxes = new GenericArray<Checkbox>();
+	private GenericArray<JTextField> textFields = new GenericArray<JTextField>();
+	private GenericArray<JComboBox<String>> dropDowns = new GenericArray<JComboBox<String>>();
 	
 	/**
 	 * Main method that starts the GUI
@@ -39,9 +42,15 @@ public class GUITemplate extends JFrame {
 	}
 	
 	/**
-	 * Constructor of the GUI, constructs an empty window
+	 * Constructor of the GUI, initializes Arrays of GUI Components
 	 */
 	public GUITemplate() {
+		this.components.extend(5);
+		this.components.setElement(0, this.labels);
+		this.components.setElement(1, this.buttons);
+		this.components.setElement(2, this.checkBoxes);
+		this.components.setElement(3, this.textFields);
+		this.components.setElement(4, this.dropDowns);
 	}
 	
 	/**
@@ -82,11 +91,13 @@ public class GUITemplate extends JFrame {
 	 * @param height - the height of the field
 	 * @return the generated JLabel object in case it is needed afterwards
 	 */
+	@SuppressWarnings("unchecked")
 	protected JLabel addLabel(String text, int xPos, int yPos, int width, int height) {
 		JLabel label = new JLabel(text);
 		label.setLocation(xPos, yPos);
 		label.setSize(width, height);
 		this.add(label);
+		this.components.getElement(0).pushBack(label);
 		return label;
 	}
 	
@@ -99,11 +110,13 @@ public class GUITemplate extends JFrame {
 	 * @param height - the height of the checkbox
 	 * @return the Checkbox object in case it's needed later on
 	 */
+	@SuppressWarnings("unchecked")
 	protected Checkbox addCheckBox(String text, int xPos, int yPos, int width, int height) {
 		Checkbox checkbox = new Checkbox(text);
 		checkbox.setLocation(xPos, yPos);
 		checkbox.setSize(width, height);
 		this.add(checkbox);
+		this.components.getElement(2).pushBack(checkbox);
 		return checkbox;
 	}
 	
@@ -117,11 +130,13 @@ public class GUITemplate extends JFrame {
 	 * @param height - the height of the field
 	 * @return the JTextField object created, so that it's content can be used later on
 	 */
+	@SuppressWarnings("unchecked")
 	protected JTextField addTextField(String text, int xPos, int yPos, int width, int height) {
 		JTextField textField = new JTextField(text);
 		textField.setLocation(xPos, yPos);
 		textField.setSize(width, height);
 		this.add(textField);
+		this.components.getElement(3).pushBack(textField);
 		return textField;
 	}
 	
@@ -135,12 +150,14 @@ public class GUITemplate extends JFrame {
 	 * @param listener - the command to be executed when the button is pressed
 	 * @return the generated JButton object in case it is needed later on.\
 	 */
+	@SuppressWarnings("unchecked")
 	protected JButton addButton(String text, int xPos, int yPos, int width, int height, ActionListener listener) {
 		JButton button = new JButton(text);
 		button.setLocation(xPos, yPos);
 		button.setSize(width, height);
 		button.addActionListener(listener);
 		this.add(button);
+		this.components.getElement(1).pushBack(button);
 		return button;
 	}
 	
@@ -153,11 +170,13 @@ public class GUITemplate extends JFrame {
 	 * @param height - the height of the item
 	 * @return the created dropdown menu in case it is used later on in the program
 	 */
+	@SuppressWarnings("unchecked")
 	protected JComboBox<String> addDropDownMenu(String[] entries, int xPos, int yPos, int width, int height) {
 		JComboBox<String> dropDown = new JComboBox<String>(entries);
 		dropDown.setLocation(xPos, yPos);
 		dropDown.setSize(width, height);
 		this.add(dropDown);
+		this.components.getElement(4).pushBack(dropDown);
 		return dropDown;
 	}
 	
@@ -225,60 +244,10 @@ public class GUITemplate extends JFrame {
 	}
 	
 	protected void setGUIStyle(int fontSize, int fontStyle, String fontType, Color backGround, Color foreGround) {
-		int componentAmount = this.getComponentCount();
-		for (int i = 0; i < componentAmount; i++) {
-			this.changeComponentAppearance((JComponent)this.getComponent(i), fontSize, fontStyle, fontType, backGround, foreGround);
-		}
-	}
-	
-	/**
-	 * Class that implements an ActionListener that opens a file open/load dialog
-	 */
-	protected class LoadSaveDialog implements ActionListener {
-		
-		private String[] allowedFileTypes;
-		private String dialogMessage;
-		private String type;
-		
-		//TODO Replace String with enum for load or save
-		/**
-		 * Constructor that defines the settings for the save/load dialog
-		 * @param allowedFileTypes - the allowed file types as a String array
-		 * @param dialogMessage - the dialog message to be displayed
-		 * @param type - the type of dialog - load or save
-		 */
-		public LoadSaveDialog(String[] allowedFileTypes, String dialogMessage, String type) {
-			this.allowedFileTypes = allowedFileTypes;
-			this.dialogMessage = dialogMessage;
-			this.type = type;
-		}
-		
-		/**
-		 * The action performed by the button press
-		 * Opens a new Save/Load Dialog
-		 * @param e - the button-press event
-		 */
-		public void actionPerformed(ActionEvent e) {
-			JFileChooser chooser = new JFileChooser();
-			//TODO Find a way for variable amount of file extensions in filter
-			FileNameExtensionFilter filter = new FileNameExtensionFilter(this.dialogMessage, allowedFileTypes[0]);
-			chooser.setFileFilter(filter);
-			int returnVal = 0;
-			if (this.type.toLowerCase().equals("save")) {
-				returnVal = chooser.showOpenDialog(null);
-			} else if (this.type.toLowerCase().equals("load")) {
-				returnVal = chooser.showSaveDialog(null);
-			}
-			if (returnVal == JFileChooser.APPROVE_OPTION) {
-				if (this.type.toLowerCase().equals("save")) {
-					//TODO Figure out how to save something
-					System.out.println("");
-				} else if (this.type.toLowerCase().equals("load")) {
-					GUITemplate.this.currentFile =  chooser.getSelectedFile();
-				}
+		for (int i = 0; i < this.components.length(); i++) {
+			for (int j = 0; j < this.components.getElement(i).length(); j++) {
+				changeComponentAppearance((JComponent)this.components.getElement(i).getElement(j), fontSize, fontStyle, fontType, backGround, foreGround);
 			}
 		}
 	}
 }
-
-//TODO Use Vererbung with JComponent where possible

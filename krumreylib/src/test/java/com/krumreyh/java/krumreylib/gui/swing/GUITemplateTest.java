@@ -23,7 +23,6 @@ public class GUITemplateTest {
 			setGUISettings("TestGui", 0, 0, 300, 300, null, EXIT_ON_CLOSE, false);
 			addLabel("testlabel", 5, 5, 50, 50);
 			addTextField("testField", 5, 60, 50, 50);
-			addButton("testButton", 5, 130, 50, 50, new LoadSaveDialog(new String[1], "test", "load"));
 			this.setVisible(true);
 		}
 	}
