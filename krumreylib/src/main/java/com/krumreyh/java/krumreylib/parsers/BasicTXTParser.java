@@ -2,7 +2,6 @@ package com.krumreyh.java.krumreylib.parsers;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -24,8 +23,5 @@ public class BasicTXTParser {
 		}
 		reader.close();
 		return text.split("/n");
-	}
-	
-	protected interface ParseAction {
 	}
 }
