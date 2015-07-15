@@ -1,14 +1,15 @@
 package com.krumreyh.java.krumrey.commons.gui.swing.templates;
 
 import com.krumreyh.java.krumrey.commons.gui.swing.components.*;
+import com.krumreyh.java.krumrey.commons.gui.swing.components.subcomponents.ConfirmationPrompt;
+import com.krumreyh.java.krumrey.commons.gui.swing.components.subcomponents.InputDialog;
+import com.krumreyh.java.krumrey.commons.gui.swing.components.subcomponents.MessageBox;
 import com.krumreyh.java.krumrey.commons.gui.swing.config.StyleConfig;
 import com.krumreyh.java.krumrey.commons.gui.swing.listeners.RightClickPopUpMenu;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 
 /**
@@ -19,6 +20,14 @@ import java.awt.image.BufferedImage;
 public class BasicGUI extends JFrame {
 
     protected StyleConfig style;
+
+    /**
+     * Getter Method for getting the style of the GUI, in case that information is needed
+     * @return the style configuration of the GUI
+     */
+    public StyleConfig getStyle() {
+        return this.style;
+    }
 
     /**
      * Sets the basic settings of the GUI. The Window starts in the middle of the screen
@@ -224,16 +233,20 @@ public class BasicGUI extends JFrame {
      * @return true, if the user entered Yes, else false
      */
     protected boolean showConfirmationPrompt(String message, String title, int xSize, int ySize) {
-
         ConfirmationPrompt prompt = new ConfirmationPrompt(this, message, title, xSize, ySize);
         return prompt.getAnswer();
     }
 
     /**
-     * Getter Method for getting the style of the GUI, in case that information is needed
-     * @return the style configuration of the GUI
+     * Starts a new Input Dialog
+     * @param message - the message displayed the user
+     * @param title - the title of the window
+     * @param xSize - the width of the window
+     * @param ySize - the height of the window
+     * @return the user's input
      */
-    public StyleConfig getStyle() {
-        return this.style;
+    protected String showInputDialog(String message, String title, int xSize, int ySize) {
+        InputDialog dialog = new InputDialog(this, message, title, xSize, ySize);
+        return dialog.getUserInput();
     }
 }

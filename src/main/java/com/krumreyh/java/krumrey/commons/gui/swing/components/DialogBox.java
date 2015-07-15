@@ -9,11 +9,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Class that models a simple Message Box
+ * Class that models JDialog to be more customizable
  * @author Hermann Krumrey (hermann@krumreyh.com)
  * @version 0.1-SNAPSHOT
  */
-public class MessageBox extends JDialog {
+public abstract class DialogBox extends JDialog {
 
     protected JFrame parent;
     protected StyleConfig style;
@@ -21,45 +21,7 @@ public class MessageBox extends JDialog {
     /**
      * Dummy Default Constructor
      */
-    public MessageBox() {;
-    }
-
-    /**
-     * Constructor that calculates the look of the Message Box based on the input values
-     * @param parent - the parent JFrame process
-     * @param message - the message to be displayed
-     * @param title - the title to be displayed
-     * @param xSize - the width of the message box. Defaults to 500 if the entered value is negative
-     * @param ySize - the height of the message box. Defaults to 200 if the entered value is negative
-     */
-    public MessageBox(BasicGUI parent, String message, String title, int xSize, int ySize) {
-
-        this.style = parent.getStyle();
-        this.parent = parent;
-
-        if (xSize < 0 || ySize < 0) {
-            xSize = 500;
-            ySize = 200;
-        }
-
-        this.setMessageBoxSettings(title, xSize, ySize);
-
-        int border = ((xSize / 16) + (ySize / 16)) / 2;
-
-        int labelX = xSize - 2 * border;
-        int labelY = ySize / 2;
-        int labelXPos = border;
-        int labelYPos = border;
-
-        int confirmX = xSize / 4;
-        int confirmY = ySize / 6;
-        int confirmXPos = (xSize / 2) - (confirmX / 2);
-        int confirmYPos = (ySize - border - confirmY);
-
-        this.addLabel(message, labelXPos, labelYPos, labelX, labelY);
-        this.addButton("OK", confirmXPos, confirmYPos, confirmX, confirmY, new ConfirmButton());
-
-        this.setVisible(true);
+    public DialogBox() {;
     }
 
     /**
@@ -68,10 +30,16 @@ public class MessageBox extends JDialog {
      * @param xSize - the width of the frame
      * @param ySize - the height of the frame
      */
-    protected void setMessageBoxSettings(String title, int xSize, int ySize) {
+    protected void setMessageBoxSettings(String title, int xSize, int ySize, int defaultX, int defaultY) {
         //Calculations
         int xPos = parent.getX();
         int yPos = parent.getY();
+        if (xSize < 0) {
+            xSize = defaultX;
+        }
+        if (ySize < 0) {
+            ySize = defaultY;
+        }
 
         parent.setEnabled(false); //Disables the Parent Frame
 
@@ -143,17 +111,26 @@ public class MessageBox extends JDialog {
     }
 
     /**
-     * Class that Implements the "OK" Button that ends the message box
+     * Method that adds a text field to the Dialog
+     * @param text - The text shown by default
+     * @param xPos - The (initial) position in the Dialog on the x-axis
+     * @param yPos - The (initial) position in the Dialog on the y-axis
+     * @param xSize - The (initial) width of the text field
+     * @param ySize - The (initial) height of the text field
+     * @return the newly generated JTextField object in case further modifications of the objects is needed.
      */
-    private class ConfirmButton implements ActionListener {
+    protected JTextField addTextField(String text, int xPos, int yPos, int xSize, int ySize) {
+        //Basics and Style
+        JTextField field = new JTextField(text);
+        field.setSize(xSize, ySize);
+        field.setLocation(xPos, yPos);
+        field.setBackground(this.style.textFieldBackground);
+        field.setForeground(this.style.textFieldForeground);
+        field.setFont(this.style.textFieldFont);
+        field.setBorder(null);
 
-        /**
-         * Closes the Message box and re-enables the parent frame
-         * @param actionEvent - the button press event
-         */
-        public void actionPerformed(ActionEvent actionEvent) {
-            MessageBox.this.dispose();
-            MessageBox.this.parent.setEnabled(true); //Re-Enables the parent frame
-        }
+        //Finalize
+        this.add(field);
+        return field;
     }
 }

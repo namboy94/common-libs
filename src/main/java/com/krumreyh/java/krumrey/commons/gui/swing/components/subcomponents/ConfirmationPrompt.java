@@ -1,14 +1,16 @@
-package com.krumreyh.java.krumrey.commons.gui.swing.components;
+package com.krumreyh.java.krumrey.commons.gui.swing.components.subcomponents;
 
+import com.krumreyh.java.krumrey.commons.gui.swing.components.DialogBox;
 import com.krumreyh.java.krumrey.commons.gui.swing.templates.BasicGUI;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
  * Class that implements a Confirmation prompt dialogue box
  */
-public class ConfirmationPrompt extends MessageBox {
+public class ConfirmationPrompt extends DialogBox {
 
     private boolean state = false;
 
@@ -25,12 +27,7 @@ public class ConfirmationPrompt extends MessageBox {
         this.parent = parent;
         this.style = parent.getStyle();
 
-        if (xSize < 0 || ySize < 0) {
-            xSize = 500;
-            ySize = 200;
-        }
-
-        this.setMessageBoxSettings(title, xSize, ySize);
+        this.setMessageBoxSettings(title, xSize, ySize, 500, 200);
 
         int border = ((xSize / 16) + (ySize / 16)) / 2;
 
