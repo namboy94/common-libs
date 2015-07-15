@@ -6,6 +6,8 @@ import com.krumreyh.java.krumrey.commons.gui.swing.templates.BasicGUI;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -57,7 +59,7 @@ public class BasicGUIDemo extends BasicGUI{
         }
 
         this.setGUISettings("Demo", 500, 900, null, EXIT_ON_CLOSE, false, style);
-        this.addButton("Button", 10, 10, 480, 200, null);
+        this.addButton("Button", 10, 10, 480, 200, new PopUpButton());
         this.addLabel("Label", 10, 220, 480, 200);
         this.addCheckBox("CheckBox", 10, 460, 100, 20);
         this.addTextField("Text Field", 200, 460, 100, 20);
@@ -76,4 +78,17 @@ public class BasicGUIDemo extends BasicGUI{
         new BasicGUIDemo();
     }
 
+    /**
+     * Class that implements an Actionlistener that just shows a message box.
+     */
+    private class PopUpButton implements ActionListener {
+
+        /**
+         * Shows a simple message box
+         * @param actionEvent - the button press event
+         */
+        public void actionPerformed(ActionEvent actionEvent) {
+            BasicGUIDemo.this.showMessageBox("Message Box");
+        }
+    }
 }

@@ -166,4 +166,8 @@ public class BasicGUI extends JFrame {
         this.add(imageLabel);
         return imageLabel;
     }
+
+    protected void showMessageBox(String message) {
+        JOptionPane.showMessageDialog(this, message);
+    }
 }
