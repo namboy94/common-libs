@@ -3,7 +3,9 @@ package com.krumreyh.java.krumrey.commons.gui.swing.templates;
 import com.krumreyh.java.krumrey.commons.gui.swing.components.ColorableButton;
 import com.krumreyh.java.krumrey.commons.gui.swing.components.ImageLabel;
 import com.krumreyh.java.krumrey.commons.gui.swing.components.MessageBox;
+import com.krumreyh.java.krumrey.commons.gui.swing.components.PopUpMenu;
 import com.krumreyh.java.krumrey.commons.gui.swing.config.StyleConfig;
+import com.krumreyh.java.krumrey.commons.gui.swing.listeners.RightClickPopUpMenu;
 
 import javax.swing.*;
 import java.awt.*;
@@ -166,6 +168,21 @@ public class BasicGUI extends JFrame {
         //Finalize
         this.add(imageLabel);
         return imageLabel;
+    }
+
+    /**
+     * Adds a Pop Up Menu accessible by right clicking the window in a predetermined location
+     * @param entries - the entries to be used
+     * @param commands - the commands to be used
+     * @param xStart - the start of the horizontal range in which the right clicking opens the menu
+     * @param xEnd - the end of the horizontal range in which the right clicking opens the menu
+     * @param yStart - the start of the vertical range in which the right clicking opens the menu
+     * @param yEnd - the end of the vertical range in which the right clicking opens the menu
+     */
+    protected void addRightClickPopUpMenu(String[] entries, ActionListener[] commands, int xStart, int xEnd, int yStart, int yEnd) {
+        PopUpMenu menu = new PopUpMenu(entries, commands);
+        RightClickPopUpMenu rightClickMenu = new RightClickPopUpMenu(menu, xStart, xEnd, yStart, yEnd);
+        this.addMouseListener(rightClickMenu);
     }
 
     /**

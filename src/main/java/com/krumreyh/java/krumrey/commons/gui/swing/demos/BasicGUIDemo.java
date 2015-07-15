@@ -60,6 +60,18 @@ public class BasicGUIDemo extends BasicGUI{
             //TODO Show Popup Dialogue
         }
 
+        String[] popUps = new String[] {
+                "Test1",
+                "Test2",
+                "Test3"
+        };
+
+        ActionListener[] popUpCommands = new ActionListener[] {
+                new PopUpButton(),
+                new PopUpButton(),
+                new PopUpButton()
+        };
+
         this.setGUISettings("Demo", 500, 900, null, EXIT_ON_CLOSE, false, style);
         this.addButton("Button", 10, 10, 480, 200, new PopUpButton());
         this.addLabel("Label", 10, 220, 480, 200);
@@ -68,6 +80,8 @@ public class BasicGUIDemo extends BasicGUI{
         this.addImageLabel(testImage1, 100, 700, 100, 100, ImageLabel.ScaleMode.STRETCH);
         this.addImageLabel(testImage1, 300, 700, 300, 200, ImageLabel.ScaleMode.TRANSPARENTBARS);
         this.addImageLabel(testImage2, 200, 550, 100, 200, ImageLabel.ScaleMode.COLOREDBARS);
+        this.addRightClickPopUpMenu(popUps, popUpCommands, 0, 500, 0, 900);
+
         this.setVisible(true);
 
     }
