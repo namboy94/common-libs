@@ -169,10 +169,19 @@ public class BasicGUI extends JFrame {
         return imageLabel;
     }
 
-    protected JComboBox<String> addDropDownMenu(String[] entries, int xPos, int yPos, int width, int height) {
+    /**
+     * Adds a dropdown menu containing Strings
+     * @param entries - the strings to be displayed
+     * @param xPos - The (initial) position in the GUI on the x-axis
+     * @param yPos - The (initial) position in the GUI on the y-axis
+     * @param xSize - The (initial) width of the dropdown menu
+     * @param ySize - The (initial) height of the dropdown menu
+     * @return the drop down menu as a JComboBox object parameterized as String
+     */
+    protected JComboBox<String> addDropDownMenu(String[] entries, int xPos, int yPos, int xSize, int ySize) {
         JComboBox<String> dropDown = new JComboBox<String>(entries);
         dropDown.setLocation(xPos, yPos);
-        dropDown.setSize(width, height);
+        dropDown.setSize(xSize, ySize);
         dropDown.setBackground(this.style.dropDownBackground);
         dropDown.setForeground(this.style.dropDownForeground);
 
@@ -196,16 +205,6 @@ public class BasicGUI extends JFrame {
     }
 
     /**
-     * Shows a simple message box in size 500x200. The Main GUI will stop responding while the message box is open
-     * @param message - the message to be displayed
-     * @param title - the title of the message boxe's window
-     */
-    protected void showMessageBox(String message, String title) {
-        this.setEnabled(false);
-        new MessageBox(this, message, title, -1, -1);
-    }
-
-    /**
      * Shows a simple message box. The Main GUI will stop responding while the message box is open
      * @param message - the message to be displayed
      * @param title - the title of the message boxe's window
@@ -216,6 +215,14 @@ public class BasicGUI extends JFrame {
         new MessageBox(this, message, title, xSize, ySize);
     }
 
+    /**
+     * Shows a simple yes/no user prompt
+     * @param message - The prompt directed at the user
+     * @param title - The title of the window
+     * @param xSize - The width of the window
+     * @param ySize - The height of the window
+     * @return true, if the user entered Yes, else false
+     */
     protected boolean showConfirmationPrompt(String message, String title, int xSize, int ySize) {
 
         ConfirmationPrompt prompt = new ConfirmationPrompt(this, message, title, xSize, ySize);

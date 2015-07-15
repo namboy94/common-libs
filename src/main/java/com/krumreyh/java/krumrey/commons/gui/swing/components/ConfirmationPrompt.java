@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 public class ConfirmationPrompt extends MessageBox {
 
     private boolean state = false;
-    private boolean prompting = true;
 
     /**
      * Constructor that defines the look of the confirmation prompt
@@ -63,14 +62,6 @@ public class ConfirmationPrompt extends MessageBox {
     }
 
     /**
-     * Method that tells if the confirmation prompt has received an answer yet
-     * @return true, if the prompt has not been completed yet and false otherwise
-     */
-    public boolean getPrompting() {
-        return this.prompting;
-    }
-
-    /**
      * Implements the "Yes" and "No" Buttons
      */
     private class AnswerButton implements ActionListener {
@@ -93,7 +84,6 @@ public class ConfirmationPrompt extends MessageBox {
             ConfirmationPrompt.this.state = this.answer;
             ConfirmationPrompt.this.dispose();
             ConfirmationPrompt.this.parent.setEnabled(true); //Re-Enables the parent frame
-            ConfirmationPrompt.this.prompting = false;
         }
     }
 }
