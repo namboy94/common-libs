@@ -1,5 +1,6 @@
 package com.krumreyh.java.krumrey.commons.gui.swing.templates;
 
+import com.krumreyh.java.krumrey.commons.gui.swing.components.ColorableButton;
 import com.krumreyh.java.krumrey.commons.gui.swing.config.StyleConfig;
 
 import javax.swing.*;
@@ -46,4 +47,29 @@ public class BasicGUI extends JFrame {
         this.getContentPane().setBackground(this.style.background);
     }
 
+    /**
+     *
+     * @param text - The text shown on the button
+     * @param xPos - The (initial) position in the GUI on the x-axis
+     * @param yPos - The (initial) position in the GUI on the y-axis
+     * @param xSize - The (initial) width of the button
+     * @param ySize - The (initial) height of the button
+     * @param action - The action to be executed when the Button is pressed
+     * @return the generated JButton object in case further modification of the button is needed
+     */
+    protected JButton addButton(String text, int xPos, int yPos, int xSize, int ySize, ActionListener action) {
+        //Basics & Style
+        Color back = this.style.buttonBackground;
+        Color fore = this.style.buttonForeground;
+        Color roll = this.style.buttonRollover;
+        Color click = this.style.buttonClicked;
+        JButton button = new ColorableButton(text, back, fore, roll, click, this.style.font);
+        button.setSize(xSize, ySize);
+        button.setLocation(xPos, yPos);
+        button.addActionListener(action);
+
+        //Finalize
+        this.add(button);
+        return button;
+    }
 }
