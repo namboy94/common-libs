@@ -22,12 +22,14 @@ public class StyleConfig {
     public Color textFieldBackground;
     public Color textFieldForeground;
     public Color imageBorderColor = new Color(0x000000);
+    public Color messageBoxBackground;
 
     public Font generalFont = new JLabel().getFont();
     public Font buttonFont = new JLabel().getFont();
     public Font labelFont = new JLabel().getFont();
     public Font checkBoxFont = new JLabel().getFont();
     public Font textFieldFont = new JLabel().getFont();
+    public Font messageBoxFont = new JLabel().getFont();
 
     /**
      * Constructor that takes the most basic settings
@@ -36,15 +38,15 @@ public class StyleConfig {
      *                              The Order is the Following:
      *                              (0)GUI Background, (1)Button Background, (2)Button Foreground, (3)Button Rollover, (4)Button Clicked.
      *                              (5)Label Background, (6)Label Foreground, (7)Checkbox Background, (8)Checkbox Foreground,
-     *                              (9)Text Field Background, (10)Text Field Foreground, (11)Image Border Color
+     *                              (9)Text Field Background, (10)Text Field Foreground, (11)Image Border Color, (12) Message Box Background
      * @param fonts -               Font array that determines the default fonts for various components of the GUI
      *                              The Order is as Following:
-     *                              (0)General Font, (1)Button Font, (2)Label Font, (3)Checkbox Font, (4)Text Field Font
+     *                              (0)General Font, (1)Button Font, (2)Label Font, (3)Checkbox Font, (4)Text Field Font, (5)Message Box Font
      */
     public StyleConfig(String[] colors, Font[] fonts) throws IllegalArgumentException {
 
         //Colors
-        if (colors.length != 12) { //This need to be updated every time a colorc component is added
+        if (colors.length != 13) { //This need to be updated every time a colorc component is added
             throw new IllegalArgumentException("Incorrect Amount of Color Hex Values");
         }
         if (this.checkHexColor(colors[0])) {
@@ -81,7 +83,10 @@ public class StyleConfig {
             this.textFieldForeground = Color.decode("0x" + colors[10]);
         }
         if (this.checkHexColor(colors[11])) {
-            this.textFieldForeground = Color.decode("0x" + colors[11]);
+            this.imageBorderColor= Color.decode("0x" + colors[11]);
+        }
+        if (this.checkHexColor(colors[12])) {
+            this.messageBoxBackground= Color.decode("0x" + colors[12]);
         }
 
         //Fonts
@@ -103,6 +108,9 @@ public class StyleConfig {
             }
             if (fonts[4] != null) {
                 this.textFieldFont = fonts[4];
+            }
+            if (fonts[5] != null) {
+                this.messageBoxFont = fonts[5];
             }
         }
     }

@@ -2,6 +2,7 @@ package com.krumreyh.java.krumrey.commons.gui.swing.templates;
 
 import com.krumreyh.java.krumrey.commons.gui.swing.components.ColorableButton;
 import com.krumreyh.java.krumrey.commons.gui.swing.components.ImageLabel;
+import com.krumreyh.java.krumrey.commons.gui.swing.components.MessageBox;
 import com.krumreyh.java.krumrey.commons.gui.swing.config.StyleConfig;
 
 import javax.swing.*;
@@ -167,7 +168,33 @@ public class BasicGUI extends JFrame {
         return imageLabel;
     }
 
-    protected void showMessageBox(String message) {
-        JOptionPane.showMessageDialog(this, message);
+    /**
+     * Shows a simple message box in size 500x200. The Main GUI will stop responding while the message box is open
+     * @param message - the message to be displayed
+     * @param title - the title of the message boxe's window
+     */
+    protected void showMessageBox(String message, String title) {
+        this.setEnabled(false);
+        new MessageBox(this, message, title, -1, -1);
+    }
+
+    /**
+     * Shows a simple message box. The Main GUI will stop responding while the message box is open
+     * @param message - the message to be displayed
+     * @param title - the title of the message boxe's window
+     * @param xSize - the width of the message box
+     * @param ySize - the height of the message box
+     */
+    protected void showMessageBox(String message, String title, int xSize, int ySize) {
+        this.setEnabled(false);
+        new MessageBox(this, message, title, 0, 0);
+    }
+
+    /**
+     * Getter Method for getting the style of the GUI, in case that information is needed
+     * @return the style configuration of the GUI
+     */
+    public StyleConfig getStyle() {
+        return this.style;
     }
 }

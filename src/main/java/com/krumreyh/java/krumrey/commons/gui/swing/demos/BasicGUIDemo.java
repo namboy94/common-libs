@@ -38,6 +38,7 @@ public class BasicGUIDemo extends BasicGUI{
                 "00FFB3",   //TURQOISE  (Text Field Background)
                 "001EFF",   //BLUE      (Text Field Foreground)
                 "000000",   //BLACK     (Scaled Image Border)
+                "000000",   //BLACK     (Message Box Background)
         };
 
         Font[] fonts = new Font[] {
@@ -45,7 +46,8 @@ public class BasicGUIDemo extends BasicGUI{
                 null,   //Button Font
                 null,   //Label Font
                 null,   //Checkbox Font
-                null    //Text Field Font
+                null,   //Text Field Font
+                null    //Message Box Font
         };
         StyleConfig style = new StyleConfig(colors, null);
 
@@ -88,7 +90,7 @@ public class BasicGUIDemo extends BasicGUI{
          * @param actionEvent - the button press event
          */
         public void actionPerformed(ActionEvent actionEvent) {
-            BasicGUIDemo.this.showMessageBox("Message Box");
+            BasicGUIDemo.this.showMessageBox("Message", "Message Box");
         }
     }
 }
