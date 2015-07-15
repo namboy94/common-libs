@@ -47,9 +47,11 @@ public class BasicGUIDemo extends BasicGUI{
         };
         StyleConfig style = new StyleConfig(colors, null);
 
-        BufferedImage testImage = null;
+        BufferedImage testImage1 = null;
+        BufferedImage testImage2 = null;
         try {
-            testImage = ImageIO.read(new File("src/main/resources/images/fcb.png"));
+            testImage1 = ImageIO.read(new File("src/main/resources/images/fcb.png"));
+            testImage2 = ImageIO.read(new File("src/main/resources/images/ente.jpg"));
         } catch (IOException e) {
             //TODO Show Popup Dialogue
         }
@@ -59,8 +61,9 @@ public class BasicGUIDemo extends BasicGUI{
         this.addLabel("Label", 10, 220, 480, 200);
         this.addCheckBox("CheckBox", 10, 460, 100, 20);
         this.addTextField("Text Field", 200, 460, 100, 20);
-        this.addImageLabel(testImage, 100, 700, 100, 100, ImageLabel.ScaleMode.STRETCH);
-        this.addImageLabel(testImage, 300, 700, 300, 200, ImageLabel.ScaleMode.STRETCH);
+        this.addImageLabel(testImage1, 100, 700, 100, 100, ImageLabel.ScaleMode.STRETCH);
+        this.addImageLabel(testImage1, 300, 700, 300, 200, ImageLabel.ScaleMode.TRANSPARENTBARS);
+        this.addImageLabel(testImage2, 200, 550, 100, 200, ImageLabel.ScaleMode.COLOREDBARS);
         this.setVisible(true);
 
     }

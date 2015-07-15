@@ -29,16 +29,19 @@ public class ImageLabel extends JLabel {
         switch (scaleMode) {
             case STRETCH:           scaled = stretchScale(image, xSize, ySize);
                                     break;
-            case COLOREDBARS:       scaled = coloredBarScale(image, xSize, ySize);
+            case COLOREDBARS:       scaled = aspectRatioScale(image, xSize, ySize);
                                     this.setBackground(background);
+                                    this.setOpaque(true);
                                     break;
-            case TRANSPARENTBARS:   scaled = transparentBarsScale(image, xSize, ySize);
+            case TRANSPARENTBARS:   scaled = aspectRatioScale(image, xSize, ySize);
                                     break;
             default:
         }
 
         this.setSize(xSize, ySize);
         this.setIcon(new ImageIcon(scaled));
+        this.setHorizontalAlignment(JLabel.CENTER);
+        this.setVerticalAlignment(JLabel.CENTER);
 
     }
 
@@ -59,25 +62,33 @@ public class ImageLabel extends JLabel {
     }
 
     /**
-     * Scales a BufferedImage to a set dimension and add colored bars to maintain aspect ratio
+     * Stretches a BufferedImage to a set dimension while maintaining aspect ratio
      * @param image - the image to be scaled
      * @param xSize - the new width of the image
      * @param ySize - the new height of the image
      * @return the scaled image
      */
-    private BufferedImage coloredBarScale(BufferedImage image, int xSize, int ySize) {
-        return null;
-    }
+    private BufferedImage aspectRatioScale(BufferedImage image, int xSize, int ySize) {
+        int newX = 0;
+        int newY = 0;
 
-    /**
-     * Stretches a BufferedImage to a set dimension while maintaining aspect ratio, without creating colored bars.
-     * @param image - the image to be scaled
-     * @param xSize - the new width of the image
-     * @param ySize - the new height of the image
-     * @return the scaled image
-     */
-    private BufferedImage transparentBarsScale(BufferedImage image, int xSize, int ySize) {
-        return null;
+        int currentX = image.getHeight();
+        int currentY = image.getWidth();
+
+        int ratio = currentX / currentY;
+
+        if (xSize < ySize) {
+            newX = xSize;
+            newY = xSize / ratio;
+        } else if (xSize > ySize) {
+            newY = ySize;
+            newX = ySize * ratio;
+        } else {
+            newX = xSize;
+            newY = ySize;
+        }
+
+        return stretchScale(image, newX, newY);
     }
 
     /**
