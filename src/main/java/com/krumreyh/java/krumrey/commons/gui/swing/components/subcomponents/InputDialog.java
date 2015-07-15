@@ -30,7 +30,12 @@ public class InputDialog extends DialogBox {
         this.parent = parent;
         this.style = parent.getStyle();
 
-        this.setMessageBoxSettings(title, xSize, ySize, 500, 300);
+        if (xSize < 0 || ySize < 0) {
+            xSize = 500;
+            ySize = 300;
+        }
+
+        this.setMessageBoxSettings(title, xSize, ySize);
 
         int border = ((xSize / 16) + (ySize / 16)) / 2;
 
@@ -51,7 +56,7 @@ public class InputDialog extends DialogBox {
         int yesNoYPos = (ySize - border - yesNoY);
 
         this.addLabel(message, labelXPos, labelYPos, labelX, labelY);
-        this.textField = this.addTextField("", textXPos, textYPos, textX, textY);
+        this.textField = this.addTextField("", textXPos, textYPos, textX, textY, new AnswerButton(true));
         this.addButton("Confirm", yesXPos, yesNoYPos, yesNoX, yesNoY, new AnswerButton(true));
         this.addButton("Cancel", noXPos, yesNoYPos, yesNoX, yesNoY, new AnswerButton(false));
 
@@ -92,6 +97,8 @@ public class InputDialog extends DialogBox {
             } else {
                 InputDialog.this.userInput = "";
             }
+            InputDialog.this.dispose();
+            InputDialog.this.parent.setEnabled(true); //Re-Enables the parent frame
         }
     }
 }

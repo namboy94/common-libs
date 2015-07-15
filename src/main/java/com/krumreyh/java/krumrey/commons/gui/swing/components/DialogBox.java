@@ -21,7 +21,7 @@ public abstract class DialogBox extends JDialog {
     /**
      * Dummy Default Constructor
      */
-    public DialogBox() {;
+    public DialogBox() {
     }
 
     /**
@@ -30,16 +30,10 @@ public abstract class DialogBox extends JDialog {
      * @param xSize - the width of the frame
      * @param ySize - the height of the frame
      */
-    protected void setMessageBoxSettings(String title, int xSize, int ySize, int defaultX, int defaultY) {
+    protected void setMessageBoxSettings(String title, int xSize, int ySize) {
         //Calculations
-        int xPos = parent.getX();
-        int yPos = parent.getY();
-        if (xSize < 0) {
-            xSize = defaultX;
-        }
-        if (ySize < 0) {
-            ySize = defaultY;
-        }
+        int xPos = this.parent.getX();
+        int yPos = this.parent.getY();
 
         parent.setEnabled(false); //Disables the Parent Frame
 
@@ -117,9 +111,10 @@ public abstract class DialogBox extends JDialog {
      * @param yPos - The (initial) position in the Dialog on the y-axis
      * @param xSize - The (initial) width of the text field
      * @param ySize - The (initial) height of the text field
+     * @param enterAction - the action taken when the TextField has focus and enter/return is pressed
      * @return the newly generated JTextField object in case further modifications of the objects is needed.
      */
-    protected JTextField addTextField(String text, int xPos, int yPos, int xSize, int ySize) {
+    protected JTextField addTextField(String text, int xPos, int yPos, int xSize, int ySize, ActionListener enterAction) {
         //Basics and Style
         JTextField field = new JTextField(text);
         field.setSize(xSize, ySize);
@@ -128,6 +123,7 @@ public abstract class DialogBox extends JDialog {
         field.setForeground(this.style.textFieldForeground);
         field.setFont(this.style.textFieldFont);
         field.setBorder(null);
+        field.addActionListener(enterAction);
 
         //Finalize
         this.add(field);

@@ -27,7 +27,12 @@ public class ConfirmationPrompt extends DialogBox {
         this.parent = parent;
         this.style = parent.getStyle();
 
-        this.setMessageBoxSettings(title, xSize, ySize, 500, 200);
+        if (xSize < 0 || ySize < 0) {
+            xSize = 500;
+            ySize = 200;
+        }
+
+        this.setMessageBoxSettings(title, xSize, ySize);
 
         int border = ((xSize / 16) + (ySize / 16)) / 2;
 

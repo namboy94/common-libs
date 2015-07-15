@@ -72,7 +72,7 @@ public class BasicGUIDemo extends BasicGUI{
         ActionListener[] popUpCommands = new ActionListener[] {
                 new PopUpButton(),
                 new AskUser(),
-                new PopUpButton()
+                new AskUserText()
         };
 
         String[] drops = new String[] {
@@ -85,7 +85,7 @@ public class BasicGUIDemo extends BasicGUI{
         this.addButton("Button", 10, 10, 480, 200, new PopUpButton());
         this.addLabel("Label", 10, 220, 480, 200);
         this.addCheckBox("CheckBox", 10, 460, 100, 20);
-        this.addTextField("Text Field", 200, 460, 100, 20);
+        this.addTextField("Text Field", 200, 460, 100, 20, null);
         this.addImageLabel(testImage1, 100, 700, 100, 100, ImageLabel.ScaleMode.STRETCH);
         this.addImageLabel(testImage1, 300, 700, 300, 200, ImageLabel.ScaleMode.TRANSPARENTBARS);
         this.addImageLabel(testImage2, 200, 550, 100, 200, ImageLabel.ScaleMode.COLOREDBARS);
@@ -114,7 +114,7 @@ public class BasicGUIDemo extends BasicGUI{
          * @param actionEvent - the button press event
          */
         public void actionPerformed(ActionEvent actionEvent) {
-            BasicGUIDemo.this.showMessageBox("Message", "Message Box");
+            BasicGUIDemo.this.showMessageBox("Message", "Message Box", -1, -1);
         }
     }
 
@@ -129,6 +129,24 @@ public class BasicGUIDemo extends BasicGUI{
          */
         public void actionPerformed(ActionEvent actionEvent) {
             if (BasicGUIDemo.this.showConfirmationPrompt("Hello! Click on Yes", "Confirmation Prompt", -1, -1)) {
+                BasicGUIDemo.this.showMessageBox("Great Success!", "Message Box", 700, 300);
+            } else {
+                BasicGUIDemo.this.showMessageBox("Epic Fail!", "Message Box", 300, 700);
+            }
+        }
+    }
+
+    /**
+     * Class that implements an Actionlistener that starts an input dialog
+     */
+    private class AskUserText implements ActionListener {
+
+        /**
+         * Starts the prompt and shows a message box afterwards
+         * @param actionEvent - the button press event
+         */
+        public void actionPerformed(ActionEvent actionEvent) {
+            if (BasicGUIDemo.this.showInputDialog("Hello! Ente: Hello!", "Input Dialog", -1, -1).equals("Hello!")) {
                 BasicGUIDemo.this.showMessageBox("Great Success!", "Message Box", 700, 300);
             } else {
                 BasicGUIDemo.this.showMessageBox("Epic Fail!", "Message Box", 300, 700);

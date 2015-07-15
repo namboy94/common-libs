@@ -142,9 +142,10 @@ public class BasicGUI extends JFrame {
      * @param yPos - The (initial) position in the GUI on the y-axis
      * @param xSize - The (initial) width of the text field
      * @param ySize - The (initial) height of the text field
+     * @param enterAction - the action taken when the TextField has focus and enter/return is pressed
      * @return the newly generated JTextField object in case further modifications of the objects is needed.
      */
-    protected JTextField addTextField(String text, int xPos, int yPos, int xSize, int ySize) {
+    protected JTextField addTextField(String text, int xPos, int yPos, int xSize, int ySize, ActionListener enterAction) {
         //Basics and Style
         JTextField field = new JTextField(text);
         field.setSize(xSize, ySize);
@@ -153,6 +154,7 @@ public class BasicGUI extends JFrame {
         field.setForeground(this.style.textFieldForeground);
         field.setFont(this.style.textFieldFont);
         field.setBorder(null);
+        field.addActionListener(enterAction);
 
         //Finalize
         this.add(field);
