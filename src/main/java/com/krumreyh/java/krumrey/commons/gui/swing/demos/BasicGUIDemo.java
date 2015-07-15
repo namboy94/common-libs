@@ -39,6 +39,8 @@ public class BasicGUIDemo extends BasicGUI{
                 "001EFF",   //BLUE      (Text Field Foreground)
                 "000000",   //BLACK     (Scaled Image Border)
                 "000000",   //BLACK     (Message Box Background)
+                "FF00FF",   //          (Dropdown Menu Background)
+                "00FFFF"    //          (Dropdown Menu Foreground)
         };
 
         Font[] fonts = new Font[] {
@@ -47,9 +49,10 @@ public class BasicGUIDemo extends BasicGUI{
                 null,   //Label Font
                 null,   //Checkbox Font
                 null,   //Text Field Font
-                null    //Message Box Font
+                null,   //Message Box Font
+                null    //Drop Down Menu Fonts
         };
-        StyleConfig style = new StyleConfig(colors, null);
+        StyleConfig style = new StyleConfig(colors, fonts);
 
         BufferedImage testImage1 = null;
         BufferedImage testImage2 = null;
@@ -68,11 +71,17 @@ public class BasicGUIDemo extends BasicGUI{
 
         ActionListener[] popUpCommands = new ActionListener[] {
                 new PopUpButton(),
-                new PopUpButton(),
+                null,
                 new PopUpButton()
         };
 
-        this.setGUISettings("Demo", 500, 900, null, EXIT_ON_CLOSE, false, style);
+        String[] drops = new String[] {
+                "drop1",
+                "drop2",
+                "drop3"
+        };
+
+        this.setGUISettings("Demo", 900, 900, null, EXIT_ON_CLOSE, false, style);
         this.addButton("Button", 10, 10, 480, 200, new PopUpButton());
         this.addLabel("Label", 10, 220, 480, 200);
         this.addCheckBox("CheckBox", 10, 460, 100, 20);
@@ -80,7 +89,8 @@ public class BasicGUIDemo extends BasicGUI{
         this.addImageLabel(testImage1, 100, 700, 100, 100, ImageLabel.ScaleMode.STRETCH);
         this.addImageLabel(testImage1, 300, 700, 300, 200, ImageLabel.ScaleMode.TRANSPARENTBARS);
         this.addImageLabel(testImage2, 200, 550, 100, 200, ImageLabel.ScaleMode.COLOREDBARS);
-        this.addRightClickPopUpMenu(popUps, popUpCommands, 0, 500, 0, 900);
+        this.addRightClickPopUpMenu(popUps, popUpCommands, 0, 900, 0, 900);
+        this.addDropDownMenu(drops, 600, 200, 250, 400);
 
         this.setVisible(true);
 

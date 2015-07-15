@@ -170,6 +170,17 @@ public class BasicGUI extends JFrame {
         return imageLabel;
     }
 
+    protected JComboBox<String> addDropDownMenu(String[] entries, int xPos, int yPos, int width, int height) {
+        JComboBox<String> dropDown = new JComboBox<String>(entries);
+        dropDown.setLocation(xPos, yPos);
+        dropDown.setSize(width, height);
+        dropDown.setBackground(this.style.dropDownBackground);
+        dropDown.setForeground(this.style.dropDownForeground);
+
+        this.add(dropDown);
+        return dropDown;
+    }
+
     /**
      * Adds a Pop Up Menu accessible by right clicking the window in a predetermined location
      * @param entries - the entries to be used

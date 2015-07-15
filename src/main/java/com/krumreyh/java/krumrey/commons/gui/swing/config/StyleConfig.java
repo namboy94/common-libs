@@ -23,6 +23,8 @@ public class StyleConfig {
     public Color textFieldForeground;
     public Color imageBorderColor = new Color(0x000000);
     public Color messageBoxBackground;
+    public Color dropDownBackground;
+    public Color dropDownForeground;
 
     public Font generalFont = new JLabel().getFont();
     public Font buttonFont = new JLabel().getFont();
@@ -30,6 +32,7 @@ public class StyleConfig {
     public Font checkBoxFont = new JLabel().getFont();
     public Font textFieldFont = new JLabel().getFont();
     public Font messageBoxFont = new JLabel().getFont();
+    public Font dropDownFont = new JLabel().getFont();
 
     /**
      * Constructor that takes the most basic settings
@@ -38,60 +41,70 @@ public class StyleConfig {
      *                              The Order is the Following:
      *                              (0)GUI Background, (1)Button Background, (2)Button Foreground, (3)Button Rollover, (4)Button Clicked.
      *                              (5)Label Background, (6)Label Foreground, (7)Checkbox Background, (8)Checkbox Foreground,
-     *                              (9)Text Field Background, (10)Text Field Foreground, (11)Image Border Color, (12) Message Box Background
+     *                              (9)Text Field Background, (10)Text Field Foreground, (11)Image Border Color, (12) Message Box Background,
+     *                              (13)Drop Down Menu Background, (14)Drop Down Foreground
      * @param fonts -               Font array that determines the default fonts for various components of the GUI
      *                              The Order is as Following:
-     *                              (0)General Font, (1)Button Font, (2)Label Font, (3)Checkbox Font, (4)Text Field Font, (5)Message Box Font
+     *                              (0)General Font, (1)Button Font, (2)Label Font, (3)Checkbox Font, (4)Text Field Font, (5)Message Box Font,
+     *                              (6)Drop Down Menu Font
      */
     public StyleConfig(String[] colors, Font[] fonts) throws IllegalArgumentException {
 
         //Colors
-        if (colors.length != 13) { //This need to be updated every time a colorc component is added
-            throw new IllegalArgumentException("Incorrect Amount of Color Hex Values");
-        }
-        if (this.checkHexColor(colors[0])) {
-            this.background = Color.decode("0x" + colors[0]);
-        }
-        if (this.checkHexColor(colors[1])) {
-            this.buttonBackground = Color.decode("0x" + colors[1]);
-        }
-        if (this.checkHexColor(colors[2])) {
-            this.buttonForeground = Color.decode("0x" + colors[2]);
-        }
-        if (this.checkHexColor(colors[3])) {
-            this.buttonRollover = Color.decode("0x" + colors[3]);
-        }
-        if (this.checkHexColor(colors[4])) {
-            this.buttonClicked = Color.decode("0x" + colors[4]);
-        }
-        if (this.checkHexColor(colors[5])) {
-            this.labelBackground = Color.decode("0x" + colors[5]);
-        }
-        if (this.checkHexColor(colors[6])) {
-            this.labelForeground = Color.decode("0x" + colors[6]);
-        }
-        if (this.checkHexColor(colors[7])) {
-            this.checkBoxBackground = Color.decode("0x" + colors[7]);
-        }
-        if (this.checkHexColor(colors[8])) {
-            this.checkBoxForeground= Color.decode("0x" + colors[8]);
-        }
-        if (this.checkHexColor(colors[9])) {
-            this.textFieldBackground = Color.decode("0x" + colors[9]);
-        }
-        if (this.checkHexColor(colors[10])) {
-            this.textFieldForeground = Color.decode("0x" + colors[10]);
-        }
-        if (this.checkHexColor(colors[11])) {
-            this.imageBorderColor= Color.decode("0x" + colors[11]);
-        }
-        if (this.checkHexColor(colors[12])) {
-            this.messageBoxBackground= Color.decode("0x" + colors[12]);
+        if (colors != null) {
+            if (colors.length != 15) { //This need to be updated every time a colorc component is added
+                throw new IllegalArgumentException("Incorrect Amount of Color Hex Values");
+            }
+            if (this.checkHexColor(colors[0])) {
+                this.background = Color.decode("0x" + colors[0]);
+            }
+            if (this.checkHexColor(colors[1])) {
+                this.buttonBackground = Color.decode("0x" + colors[1]);
+            }
+            if (this.checkHexColor(colors[2])) {
+                this.buttonForeground = Color.decode("0x" + colors[2]);
+            }
+            if (this.checkHexColor(colors[3])) {
+                this.buttonRollover = Color.decode("0x" + colors[3]);
+            }
+            if (this.checkHexColor(colors[4])) {
+                this.buttonClicked = Color.decode("0x" + colors[4]);
+            }
+            if (this.checkHexColor(colors[5])) {
+                this.labelBackground = Color.decode("0x" + colors[5]);
+            }
+            if (this.checkHexColor(colors[6])) {
+                this.labelForeground = Color.decode("0x" + colors[6]);
+            }
+            if (this.checkHexColor(colors[7])) {
+                this.checkBoxBackground = Color.decode("0x" + colors[7]);
+            }
+            if (this.checkHexColor(colors[8])) {
+                this.checkBoxForeground = Color.decode("0x" + colors[8]);
+            }
+            if (this.checkHexColor(colors[9])) {
+                this.textFieldBackground = Color.decode("0x" + colors[9]);
+            }
+            if (this.checkHexColor(colors[10])) {
+                this.textFieldForeground = Color.decode("0x" + colors[10]);
+            }
+            if (this.checkHexColor(colors[11])) {
+                this.imageBorderColor = Color.decode("0x" + colors[11]);
+            }
+            if (this.checkHexColor(colors[12])) {
+                this.messageBoxBackground = Color.decode("0x" + colors[12]);
+            }
+            if (this.checkHexColor(colors[13])) {
+                this.dropDownBackground = Color.decode("0x" + colors[13]);
+            }
+            if (this.checkHexColor(colors[14])) {
+                this.dropDownForeground = Color.decode("0x" + colors[14]);
+            }
         }
 
         //Fonts
         if (fonts != null) {
-            if (fonts.length != 4) {
+            if (fonts.length != 7) {
                 throw new IllegalArgumentException("Illegal Amount of Fonts");
             }
             if (fonts[0] != null) {
@@ -111,6 +124,9 @@ public class StyleConfig {
             }
             if (fonts[5] != null) {
                 this.messageBoxFont = fonts[5];
+            }
+            if (fonts[5] != null) {
+                this.dropDownFont = fonts[6];
             }
         }
     }
