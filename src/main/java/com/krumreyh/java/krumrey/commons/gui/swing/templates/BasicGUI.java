@@ -48,7 +48,7 @@ public class BasicGUI extends JFrame {
     }
 
     /**
-     *
+     * Method that adds a colored JButton to the GUI
      * @param text - The text shown on the button
      * @param xPos - The (initial) position in the GUI on the x-axis
      * @param yPos - The (initial) position in the GUI on the y-axis
@@ -71,5 +71,28 @@ public class BasicGUI extends JFrame {
         //Finalize
         this.add(button);
         return button;
+    }
+
+    /**
+     * Method that adds a JLabel to the GUI
+     * @param text - The text shown on the button
+     * @param xPos - The (initial) position in the GUI on the x-axis
+     * @param yPos - The (initial) position in the GUI on the y-axis
+     * @param xSize - The (initial) width of the label
+     * @param ySize - The (initial) height of the label
+     * @return the newly generated JLabel object in case further modifications of the objects is needed.
+     */
+    protected JLabel addLabel(String text, int xPos, int yPos, int xSize, int ySize) {
+        //Basics and Style
+        JLabel label = new JLabel(text);
+        label.setSize(xSize, ySize);
+        label.setLocation(xPos, yPos);
+        label.setBackground(this.style.labelBackground);
+        label.setForeground(this.style.labelForeground);
+        label.setOpaque(true);
+
+        //Finalize
+        this.add(label);
+        return label;
     }
 }
