@@ -71,7 +71,7 @@ public class BasicGUIDemo extends BasicGUI{
 
         ActionListener[] popUpCommands = new ActionListener[] {
                 new PopUpButton(),
-                null,
+                new AskUser(),
                 new PopUpButton()
         };
 
@@ -115,6 +115,24 @@ public class BasicGUIDemo extends BasicGUI{
          */
         public void actionPerformed(ActionEvent actionEvent) {
             BasicGUIDemo.this.showMessageBox("Message", "Message Box");
+        }
+    }
+
+    /**
+     * Class that implements an Actionlistener that starts a confirmation prompt
+     */
+    private class AskUser implements ActionListener {
+
+        /**
+         * Starts the prompt and shows a message box afterwards
+         * @param actionEvent - the button press event
+         */
+        public void actionPerformed(ActionEvent actionEvent) {
+            if (BasicGUIDemo.this.showConfirmationPrompt("Hello! Click on Yes", "Confirmation Prompt", -1, -1)) {
+                BasicGUIDemo.this.showMessageBox("Great Success!", "Message Box", -1, -1);
+            } else {
+                BasicGUIDemo.this.showMessageBox("Epic Fail!", "Message Box", -1, -1);
+            }
         }
     }
 }

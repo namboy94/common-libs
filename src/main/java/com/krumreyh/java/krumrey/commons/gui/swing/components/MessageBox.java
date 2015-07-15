@@ -15,7 +15,13 @@ import java.awt.event.ActionListener;
  */
 public class MessageBox extends BasicGUI{
 
-    private JFrame parent;
+    protected JFrame parent;
+
+    /**
+     * Dummy Default Constructor
+     */
+    public MessageBox() {;
+    }
 
     /**
      * Constructor that calculates the look of the Message Box based on the input values
@@ -61,10 +67,12 @@ public class MessageBox extends BasicGUI{
      * @param xSize - the width of the frame
      * @param ySize - the height of the frame
      */
-    private void setMessageBoxSettings(String title, int xSize, int ySize) {
+    protected void setMessageBoxSettings(String title, int xSize, int ySize) {
         //Calculations
         int xPos = parent.getX();
         int yPos = parent.getY();
+
+        parent.setEnabled(false); //Disables the Parent Frame
 
         //Settings
         this.setTitle(title);
@@ -93,7 +101,7 @@ public class MessageBox extends BasicGUI{
          */
         public void actionPerformed(ActionEvent actionEvent) {
             MessageBox.this.dispose();
-            MessageBox.this.parent.setEnabled(true);
+            MessageBox.this.parent.setEnabled(true); //Re-Enables the parent frame
         }
     }
 

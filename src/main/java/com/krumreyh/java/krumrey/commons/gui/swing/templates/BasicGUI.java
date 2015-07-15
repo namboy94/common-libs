@@ -1,15 +1,14 @@
 package com.krumreyh.java.krumrey.commons.gui.swing.templates;
 
-import com.krumreyh.java.krumrey.commons.gui.swing.components.ColorableButton;
-import com.krumreyh.java.krumrey.commons.gui.swing.components.ImageLabel;
-import com.krumreyh.java.krumrey.commons.gui.swing.components.MessageBox;
-import com.krumreyh.java.krumrey.commons.gui.swing.components.PopUpMenu;
+import com.krumreyh.java.krumrey.commons.gui.swing.components.*;
 import com.krumreyh.java.krumrey.commons.gui.swing.config.StyleConfig;
 import com.krumreyh.java.krumrey.commons.gui.swing.listeners.RightClickPopUpMenu;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 
 /**
@@ -214,8 +213,14 @@ public class BasicGUI extends JFrame {
      * @param ySize - the height of the message box
      */
     protected void showMessageBox(String message, String title, int xSize, int ySize) {
-        this.setEnabled(false);
         new MessageBox(this, message, title, 0, 0);
+    }
+
+    protected boolean showConfirmationPrompt(String message, String title, int xSize, int ySize) {
+
+        ConfirmationPrompt prompt = new ConfirmationPrompt(this, message, title, xSize, ySize);
+        return prompt.getAnswer();
+        //TODO Wait for user input to end.
     }
 
     /**
