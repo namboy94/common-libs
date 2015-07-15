@@ -26,7 +26,7 @@ public class ConfirmationPrompt extends MessageBox {
         this.parent = parent;
         this.style = parent.getStyle();
 
-        if (xSize < 0 && ySize < 0) {
+        if (xSize < 0 || ySize < 0) {
             xSize = 500;
             ySize = 200;
         }

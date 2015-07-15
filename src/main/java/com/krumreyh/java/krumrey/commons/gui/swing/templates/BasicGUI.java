@@ -213,14 +213,13 @@ public class BasicGUI extends JFrame {
      * @param ySize - the height of the message box
      */
     protected void showMessageBox(String message, String title, int xSize, int ySize) {
-        new MessageBox(this, message, title, 0, 0);
+        new MessageBox(this, message, title, xSize, ySize);
     }
 
     protected boolean showConfirmationPrompt(String message, String title, int xSize, int ySize) {
 
         ConfirmationPrompt prompt = new ConfirmationPrompt(this, message, title, xSize, ySize);
         return prompt.getAnswer();
-        //TODO Wait for user input to end.
     }
 
     /**

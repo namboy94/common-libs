@@ -129,9 +129,9 @@ public class BasicGUIDemo extends BasicGUI{
          */
         public void actionPerformed(ActionEvent actionEvent) {
             if (BasicGUIDemo.this.showConfirmationPrompt("Hello! Click on Yes", "Confirmation Prompt", -1, -1)) {
-                BasicGUIDemo.this.showMessageBox("Great Success!", "Message Box", -1, -1);
+                BasicGUIDemo.this.showMessageBox("Great Success!", "Message Box", 700, 300);
             } else {
-                BasicGUIDemo.this.showMessageBox("Epic Fail!", "Message Box", -1, -1);
+                BasicGUIDemo.this.showMessageBox("Epic Fail!", "Message Box", 300, 700);
             }
         }
     }

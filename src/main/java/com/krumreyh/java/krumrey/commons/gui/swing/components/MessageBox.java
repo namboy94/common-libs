@@ -13,9 +13,10 @@ import java.awt.event.ActionListener;
  * @author Hermann Krumrey (hermann@krumreyh.com)
  * @version 0.1-SNAPSHOT
  */
-public class MessageBox extends BasicGUI{
+public class MessageBox extends JDialog {
 
     protected JFrame parent;
+    protected StyleConfig style;
 
     /**
      * Dummy Default Constructor
@@ -36,7 +37,7 @@ public class MessageBox extends BasicGUI{
         this.style = parent.getStyle();
         this.parent = parent;
 
-        if (xSize < 0 && ySize < 0) {
+        if (xSize < 0 || ySize < 0) {
             xSize = 500;
             ySize = 200;
         }
@@ -84,10 +85,61 @@ public class MessageBox extends BasicGUI{
         this.setFont(this.style.messageBoxFont);
         this.pack();
         this.getContentPane().setBackground(this.style.messageBoxBackground);
+        this.setModal(true);
 
         //Override Fonts
         this.style.buttonFont = this.style.messageBoxFont;
         this.style.labelFont = this.style.messageBoxFont;
+    }
+
+    /**
+     * Method that adds a colored JButton to the Dialog
+     * @param text - The text shown on the button
+     * @param xPos - The (initial) position in the Dialog on the x-axis
+     * @param yPos - The (initial) position in the Dialog on the y-axis
+     * @param xSize - The (initial) width of the button
+     * @param ySize - The (initial) height of the button
+     * @param action - The action to be executed when the Button is pressed
+     * @return the generated JButton object in case further modification of the button is needed
+     */
+    protected JButton addButton(String text, int xPos, int yPos, int xSize, int ySize, ActionListener action) {
+        //Basics & Style
+        Color back = this.style.buttonBackground;
+        Color fore = this.style.buttonForeground;
+        Color roll = this.style.buttonRollover;
+        Color click = this.style.buttonClicked;
+        JButton button = new ColorableButton(text, back, fore, roll, click, this.style.buttonFont);
+        button.setSize(xSize, ySize);
+        button.setLocation(xPos, yPos);
+        button.addActionListener(action);
+
+        //Finalize
+        this.add(button);
+        return button;
+    }
+
+    /**
+     * Method that adds a JLabel to the Dialog
+     * @param text - The text shown on the button
+     * @param xPos - The (initial) position in the Dialog on the x-axis
+     * @param yPos - The (initial) position in the Dialog on the y-axis
+     * @param xSize - The (initial) width of the label
+     * @param ySize - The (initial) height of the label
+     * @return the newly generated JLabel object in case further modifications of the objects is needed.
+     */
+    protected JLabel addLabel(String text, int xPos, int yPos, int xSize, int ySize) {
+        //Basics and Style
+        JLabel label = new JLabel(text, SwingConstants.CENTER);
+        label.setSize(xSize, ySize);
+        label.setLocation(xPos, yPos);
+        label.setBackground(this.style.labelBackground);
+        label.setForeground(this.style.labelForeground);
+        label.setOpaque(true);
+        label.setFont(this.style.labelFont);
+
+        //Finalize
+        this.add(label);
+        return label;
     }
 
     /**
@@ -104,5 +156,4 @@ public class MessageBox extends BasicGUI{
             MessageBox.this.parent.setEnabled(true); //Re-Enables the parent frame
         }
     }
-
 }
