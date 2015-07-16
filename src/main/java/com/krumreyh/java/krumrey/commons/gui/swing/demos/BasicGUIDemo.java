@@ -26,7 +26,7 @@ public class BasicGUIDemo extends BasicGUI{
     public BasicGUIDemo() {
 
         String[] colors = new String[] {
-                "FF0000",   //RED       (GUI Background)
+                "FFEE00",   //RED       (GUI Background)
                 "005EFF",   //BLUE      (Button Background)
                 "09FF00",   //GREEN     (Button Foreground)
                 "FF9D00",   //ORANGE    (Button Rollover)
@@ -39,8 +39,14 @@ public class BasicGUIDemo extends BasicGUI{
                 "001EFF",   //BLUE      (Text Field Foreground)
                 "000000",   //BLACK     (Scaled Image Border)
                 "000000",   //BLACK     (Message Box Background)
-                "FF00FF",   //          (Dropdown Menu Background)
-                "00FFFF"    //          (Dropdown Menu Foreground)
+                "FF00FF",   //Purple    (Dropdown Menu Background)
+                "00FFFF"    //GB        (Dropdown Menu Foreground)
+        };
+
+        String[] sysColors = new String[] {
+                "000000",   //BLACK     (Base)
+                "000000",   //BLACK     (Blue/Grey)
+                "000000"    //BLACK     (Control)
         };
 
         Font[] fonts = new Font[] {
@@ -52,7 +58,7 @@ public class BasicGUIDemo extends BasicGUI{
                 null,   //Message Box Font
                 null    //Drop Down Menu Fonts
         };
-        StyleConfig style = new StyleConfig(colors, fonts);
+        StyleConfig style = new StyleConfig(null, null, fonts);
 
         BufferedImage testImage1 = null;
         BufferedImage testImage2 = null;

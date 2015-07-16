@@ -59,6 +59,27 @@ public class BasicGUI extends JFrame {
 
         //Style
         this.getContentPane().setBackground(this.style.background);
+        UIManager.put("nimbusBase", this.style.uiBase);
+        UIManager.put("nimbusBlueGrey", this.style.uiBlueGrey);
+        UIManager.put("control", this.style.uiControl);
+
+        for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+            if ("Nimbus".equals(info.getName())) {
+                //TODO handle execeptions
+                try {
+                    UIManager.setLookAndFeel(info.getClassName());
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                } catch (InstantiationException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (UnsupportedLookAndFeelException e) {
+                    e.printStackTrace();
+                }
+                break;
+            }
+        }
     }
 
     /**
@@ -128,7 +149,8 @@ public class BasicGUI extends JFrame {
         box.setBackground(this.style.checkBoxBackground);
         box.setForeground(this.style.checkBoxForeground);
         box.setFont(this.style.checkBoxFont);
-        box.setFocusPainted(false);
+        box.getIcon();
+        System.out.println("Test");
 
         //Finalize
         this.add(box);

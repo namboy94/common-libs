@@ -11,20 +11,24 @@ import java.awt.*;
 public class StyleConfig {
 
     public Color background = UIManager.getColor("Panel.background");
-    public Color buttonBackground;
-    public Color buttonForeground;
-    public Color buttonRollover;
-    public Color buttonClicked;
-    public Color labelBackground;
-    public Color labelForeground;
-    public Color checkBoxBackground;
-    public Color checkBoxForeground;
-    public Color textFieldBackground;
-    public Color textFieldForeground;
+    public Color buttonBackground = UIManager.getColor("Button.background");
+    public Color buttonForeground = UIManager.getColor("Button.foreground");
+    public Color buttonRollover = UIManager.getColor("Button.highlight");
+    public Color buttonClicked = UIManager.getColor("Button.select");
+    public Color labelBackground = UIManager.getColor("Label.background");
+    public Color labelForeground = UIManager.getColor("Label.foreground");
+    public Color checkBoxBackground = UIManager.getColor("CheckBoxMenuItem.background");
+    public Color checkBoxForeground = UIManager.getColor("CheckBoxMenuItem.foreground");
+    public Color textFieldBackground = UIManager.getColor("TextField.background");
+    public Color textFieldForeground = UIManager.getColor("TextField.foreground");
     public Color imageBorderColor = new Color(0x000000);
-    public Color messageBoxBackground;
-    public Color dropDownBackground;
-    public Color dropDownForeground;
+    public Color messageBoxBackground = UIManager.getColor("Panel.background");
+    public Color dropDownBackground = UIManager.getColor("ComboBox.background");
+    public Color dropDownForeground = UIManager.getColor("ComboBox.foreground");
+
+    public Color uiBase;
+    public Color uiBlueGrey;
+    public Color uiControl;
 
     public Font generalFont = new JLabel().getFont();
     public Font buttonFont = new JLabel().getFont();
@@ -38,17 +42,25 @@ public class StyleConfig {
      * Constructor that takes the most basic settings
      * @param colors -              String Array of Hex Color Values used to determine the GUI's colors.
      *                              If the Array is null, the default colors are used
+     *                              If any element in the array is null, it defaults to the default value
      *                              The Order is the Following:
      *                              (0)GUI Background, (1)Button Background, (2)Button Foreground, (3)Button Rollover, (4)Button Clicked.
      *                              (5)Label Background, (6)Label Foreground, (7)Checkbox Background, (8)Checkbox Foreground,
      *                              (9)Text Field Background, (10)Text Field Foreground, (11)Image Border Color, (12) Message Box Background,
      *                              (13)Drop Down Menu Background, (14)Drop Down Foreground
+     * @param sysColors -           String array of Hex Color Values used to determine the GUI's base colors (replaces nimbus default values)
+     *                              If the array is null, the default colors are used.
+     *                              If any element in the array is null, it defaults to the default value
+     *                              The order is the following:
+     *                              (0)Base, (1)Blue/Grey, (2)Control
      * @param fonts -               Font array that determines the default fonts for various components of the GUI
+     *                              If the array is null, the default fonts are used.
+     *                              If any element in the array is null, it defaults to the default value
      *                              The Order is as Following:
      *                              (0)General Font, (1)Button Font, (2)Label Font, (3)Checkbox Font, (4)Text Field Font, (5)Message Box Font,
      *                              (6)Drop Down Menu Font
      */
-    public StyleConfig(String[] colors, Font[] fonts) throws IllegalArgumentException {
+    public StyleConfig(String[] colors, String[] sysColors, Font[] fonts) throws IllegalArgumentException {
 
         //Colors
         if (colors != null) {
@@ -99,6 +111,22 @@ public class StyleConfig {
             }
             if (this.checkHexColor(colors[14])) {
                 this.dropDownForeground = Color.decode("0x" + colors[14]);
+            }
+        }
+
+        //System Colors
+        if (sysColors != null) {
+            if (sysColors.length != 3) { //This need to be updated every time a color component is added
+                throw new IllegalArgumentException("Incorrect Amount of System Color Hex Values");
+            }
+            if (this.checkHexColor(sysColors[0])) {
+                this.uiBase = Color.decode("0x" + sysColors[0]);
+            }
+            if (this.checkHexColor(sysColors[1])) {
+                this.uiBlueGrey = Color.decode("0x" + sysColors[1]);
+            }
+            if (this.checkHexColor(sysColors[2])) {
+                this.uiControl = Color.decode("0x" + sysColors[2]);
             }
         }
 

@@ -3,6 +3,7 @@ package com.krumreyh.java.krumrey.commons.gui.swing.components.subcomponents;
 import com.krumreyh.java.krumrey.commons.gui.swing.components.DialogBox;
 import com.krumreyh.java.krumrey.commons.gui.swing.templates.BasicGUI;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -46,7 +47,9 @@ public class MessageBox extends DialogBox {
         int confirmYPos = (ySize - border - confirmY);
 
         this.addLabel(message, labelXPos, labelYPos, labelX, labelY);
-        this.addButton("OK", confirmXPos, confirmYPos, confirmX, confirmY, new ConfirmButton());
+        JButton confirmButton = this.addButton("OK", confirmXPos, confirmYPos, confirmX, confirmY, new ConfirmButton());
+
+        this.getRootPane().setDefaultButton(confirmButton);
 
         this.setVisible(true);
     }
