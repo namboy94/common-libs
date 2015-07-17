@@ -27,28 +27,31 @@ public class BasicGUIDemo extends BasicGUI{
      */
     public BasicGUIDemo() {
 
+        //Setting Style
         String[] colors = new String[] {
-                "FFEE00",   //RED       (GUI Background)
-                "FF0000",   //BLUE      (Button Background)
-                "09FF00",   //GREEN     (Button Foreground)
-                "FF9D00",   //ORANGE    (Button Rollover)
-                "FFF700",   //YELLOW    (Button Clicked)
-                "FF00F7",   //PURPLE    (Label Background)
-                "000000",   //BLACK     (Label Foreground)
-                "FFFFFF",   //WHITE     (Checkbox Background)
-                "999999",   //GREY      (Checkbox Foreground)
-                "00FFB3",   //TURQOISE  (Text Field Background)
-                "001EFF",   //BLUE      (Text Field Foreground)
-                "000000",   //BLACK     (Scaled Image Border)
-                "000000",   //BLACK     (Message Box Background)
-                "FF00FF",   //Purple    (Dropdown Menu Background)
-                "00FFFF"    //GB        (Dropdown Menu Foreground)
+                null,   //(UI Background
+                null,   //Button Background
+                null,   //Button Foreground
+                null,   //Button Rollover
+                null,   //Button Clicked
+                null,   //Label Background
+                null,   //Label Foreground
+                null,   //Checkbox Background
+                null,   //Checkbox Foreground
+                null,   //Text Field Background
+                null,   //Text Field Foreground
+                null,   //Scaled Image Border
+                null,   //Message Box Background
+                null,   //Dropdown Menu Background
+                null    //Dropdown Menu Foreground
         };
 
         String[] sysColors = new String[] {
-                "FF0000",   //RED       (Base)
-                "00FF00",   //GREEN     (Blue/Grey)
-                "0000FF"    //BLUE      (Control)
+                null,   //Base
+                null,   //Blue/Grey
+                null,   //Control
+                null,   //Focus
+                null    //Selection Background
         };
 
         Font[] fonts = new Font[] {
@@ -60,8 +63,10 @@ public class BasicGUIDemo extends BasicGUI{
                 null,   //Message Box Font
                 null    //Drop Down Menu Fonts
         };
-        StyleConfig style = new StyleConfig(colors, null, fonts);
 
+        StyleConfig style = new KrumreyDefault(colors, sysColors, fonts);
+
+        //Resource Loading
         BufferedImage testImage1 = null;
         BufferedImage testImage2 = null;
         try {
@@ -71,6 +76,7 @@ public class BasicGUIDemo extends BasicGUI{
             this.showMessageBox("Error loading image resources.", "Image I/O Error", -1, -1);
         }
 
+        //Defining List/Menu Elements
         String[] popUps = new String[] {
                 "Test1",
                 "Test2",
@@ -89,6 +95,7 @@ public class BasicGUIDemo extends BasicGUI{
                 "drop3"
         };
 
+        //Defining GUI
         this.setGUISettings("Demo", 900, 900, null, EXIT_ON_CLOSE, false, new KrumreyDefault());
         JButton buttonTest = this.addButton("Button", 10, 10, 480, 200, new PopUpButton());
         this.addLabel("Label", 10, 220, 480, 200);

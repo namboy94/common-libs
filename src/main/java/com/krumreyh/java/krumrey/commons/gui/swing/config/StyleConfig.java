@@ -47,7 +47,7 @@ public class StyleConfig {
     }
 
     /**
-     * Constructor that takes the most basic settings
+     * Constructor that sets custom colors and fonts to create a Style
      * @param colors -              String Array of Hex Color Values used to determine the GUI's colors.
      *                              If the Array is null, the default colors are used
      *                              If any element in the array is null, it defaults to the default value

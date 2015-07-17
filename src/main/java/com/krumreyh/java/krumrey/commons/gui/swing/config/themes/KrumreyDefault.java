@@ -36,8 +36,8 @@ public class KrumreyDefault extends StyleConfig{
         this.uiBase = new Color(0xBABABA);
         this.uiBlueGrey = new Color(0xBABABA);
         this.uiControl = new Color(0xBABABA);
-        this.uiFocus = new Color(0x000000);
-        this.uiSelectionBackground = new Color(0x000000);
+        this.uiFocus = new Color(0xB8B8B8);
+        this.uiSelectionBackground = new Color(0xB8B8B8);
 
         this.generalFont = new Font("Verdana", Font.PLAIN, 10);
         this.buttonFont = new Font("Verdana", Font.PLAIN, 10);
@@ -47,6 +47,17 @@ public class KrumreyDefault extends StyleConfig{
         this.messageBoxFont = new Font("Verdana", Font.PLAIN, 10);
         this.dropDownFont = new Font("Verdana", Font.PLAIN, 10);
 
+    }
+
+    /**
+     * Constructor that enables customization of individual colors and fonts
+     * @param colors - refer to parent class StyleConfig
+     * @param sysColors - refer to parent class StyleConfig
+     * @param fonts - refer to parent class StyleConfig
+     * @throws IllegalArgumentException
+     */
+    public KrumreyDefault(String[] colors, String[] sysColors, Font[] fonts) throws IllegalArgumentException {
+        super();
     }
 
 }
