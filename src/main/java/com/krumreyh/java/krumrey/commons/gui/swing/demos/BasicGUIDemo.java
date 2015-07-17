@@ -2,9 +2,11 @@ package com.krumreyh.java.krumrey.commons.gui.swing.demos;
 
 import com.krumreyh.java.krumrey.commons.gui.swing.components.ImageLabel;
 import com.krumreyh.java.krumrey.commons.gui.swing.config.StyleConfig;
+import com.krumreyh.java.krumrey.commons.gui.swing.config.themes.KrumreyDefault;
 import com.krumreyh.java.krumrey.commons.gui.swing.templates.BasicGUI;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,7 +29,7 @@ public class BasicGUIDemo extends BasicGUI{
 
         String[] colors = new String[] {
                 "FFEE00",   //RED       (GUI Background)
-                "005EFF",   //BLUE      (Button Background)
+                "FF0000",   //BLUE      (Button Background)
                 "09FF00",   //GREEN     (Button Foreground)
                 "FF9D00",   //ORANGE    (Button Rollover)
                 "FFF700",   //YELLOW    (Button Clicked)
@@ -44,9 +46,9 @@ public class BasicGUIDemo extends BasicGUI{
         };
 
         String[] sysColors = new String[] {
-                "000000",   //BLACK     (Base)
-                "000000",   //BLACK     (Blue/Grey)
-                "000000"    //BLACK     (Control)
+                "FF0000",   //RED       (Base)
+                "00FF00",   //GREEN     (Blue/Grey)
+                "0000FF"    //BLUE      (Control)
         };
 
         Font[] fonts = new Font[] {
@@ -58,7 +60,7 @@ public class BasicGUIDemo extends BasicGUI{
                 null,   //Message Box Font
                 null    //Drop Down Menu Fonts
         };
-        StyleConfig style = new StyleConfig(null, null, fonts);
+        StyleConfig style = new StyleConfig(colors, null, fonts);
 
         BufferedImage testImage1 = null;
         BufferedImage testImage2 = null;
@@ -66,7 +68,7 @@ public class BasicGUIDemo extends BasicGUI{
             testImage1 = ImageIO.read(new File("src/main/resources/images/fcb.png"));
             testImage2 = ImageIO.read(new File("src/main/resources/images/ente.jpg"));
         } catch (IOException e) {
-            //TODO Show Popup Dialogue
+            this.showMessageBox("Error loading image resources.", "Image I/O Error", -1, -1);
         }
 
         String[] popUps = new String[] {
@@ -87,8 +89,8 @@ public class BasicGUIDemo extends BasicGUI{
                 "drop3"
         };
 
-        this.setGUISettings("Demo", 900, 900, null, EXIT_ON_CLOSE, false, style);
-        this.addButton("Button", 10, 10, 480, 200, new PopUpButton());
+        this.setGUISettings("Demo", 900, 900, null, EXIT_ON_CLOSE, false, new KrumreyDefault());
+        JButton buttonTest = this.addButton("Button", 10, 10, 480, 200, new PopUpButton());
         this.addLabel("Label", 10, 220, 480, 200);
         this.addCheckBox("CheckBox", 10, 460, 100, 20);
         this.addTextField("Text Field", 200, 460, 100, 20, null);

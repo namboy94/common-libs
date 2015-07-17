@@ -46,7 +46,8 @@ public abstract class DialogBox extends JDialog {
         this.setResizable(false);
         this.setFont(this.style.messageBoxFont);
         this.pack();
-        this.getContentPane().setBackground(this.style.messageBoxBackground);
+        this.getContentPane().setBackground(this.style.dialogBoxBackground);
+        this.getContentPane().setForeground(this.style.dialogBoxBackground);
         this.setModal(true);
 
         //Override Fonts
