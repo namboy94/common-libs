@@ -25,7 +25,7 @@ public class AdvancedFile extends File {
      * @param file - the file to be turned into an AdvancedFile
      * @return the newly created AdvancedFile
      */
-    private static AdvancedFile turnIntoAdvancedFile(File file) {
+    public static AdvancedFile turnIntoAdvancedFile(File file) {
         String pathname = file.getAbsolutePath();
         pathname += new AdvancedFile(pathname).getDivider();
         pathname += file.getName();

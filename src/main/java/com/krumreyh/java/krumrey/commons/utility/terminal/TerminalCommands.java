@@ -1,4 +1,4 @@
-package com.krumreyh.java.krumrey.commons.utils.terminal;
+package com.krumreyh.java.krumrey.commons.utility.terminal;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 
 /**
  * Class that offers more convenient methods for interacting with the console/terminal
+ * @author Hermann Krumrey (hermann@krumreyh.com)
+ * @version 0.2-SNAPSHOT
  */
 public class TerminalCommands {
 
