@@ -20,9 +20,10 @@ import com.krumreyh.java.krumreylib.arrayops.GenericArray;
 /**
  * Class that extends Swing's JFrame and has methods that simplify the adding of
  * GUI objects.
- * @author Hermann Krumrey
- * @version 1.0
+ * Deprecated as of V0.3
+ * @author Hermann Krumrey (hermann@krumreyh.com)
  */
+@Deprecated
 public class GUITemplate extends JFrame {
 	
 	@SuppressWarnings("rawtypes")
