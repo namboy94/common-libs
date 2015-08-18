@@ -11,6 +11,7 @@ import java.util.Arrays;
  * @author Hermann Krumrey
  * @version 1.0
  */
+@Deprecated
 public class FileHandler {
 	
 	/**
