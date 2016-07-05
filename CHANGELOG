@@ -1,2 +1,4 @@
-V 0.0.1
+V 0.1.0
+    - Implemented basic file operation methods
+    - Implemented byte string converter
     - Initial project structure
