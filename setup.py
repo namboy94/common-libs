@@ -21,3 +21,54 @@ This file is part of puffotter.
     along with puffotter.  If not, see <http://www.gnu.org/licenses/>.
 LICENSE
 """
+
+# imports
+from setuptools import setup, find_packages
+import puffotter.metadata as metadata
+
+
+def readme() -> str:
+    """
+    Reads the readme file.
+
+    :return: the readme file as a string
+    """
+    try:
+        # noinspection PyPackageRequirements
+        import pypandoc
+        with open('README.md') as f:
+            # Convert markdown file to rst
+            markdown = f.read()
+            rst = pypandoc.convert(markdown, 'rst', format='md')
+            return rst
+    except (OSError, ImportError):
+        # If pandoc is not installed, just return the raw markdown text
+        with open('README.md') as f:
+            return f.read()
+
+
+setup(name=metadata.project_name,
+      version=metadata.version_number,
+      description=metadata.project_description,
+      long_description=readme(),
+      classifiers=[metadata.development_status,
+                   metadata.audience,
+                   metadata.license_identifier,
+                   metadata.programming_language,
+                   metadata.topic,
+                   metadata.language,
+                   metadata.compatible_os,
+                   metadata.environment
+                   ],
+      url=metadata.project_url,
+      download_url=metadata.download_url,
+      author=metadata.author_name,
+      author_email=metadata.author_email,
+      license=metadata.license_type,
+      packages=find_packages(),
+      install_requires=metadata.python3_requirements,
+      dependency_links=[],
+      test_suite='nose.collector',
+      tests_require=['nose'],
+      scripts=[],
+      zip_safe=False)
