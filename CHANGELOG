@@ -1,3 +1,6 @@
+V 0.1.5
+  - Added interactive CLI template class
+  - Added methods to ensure files/directories exist
 V 0.1.1
   - Fixed setuptools configuration
 V 0.1.0
