@@ -58,3 +58,25 @@ def rename_file(file: str, new_name: str) -> str:
     print("renaming file " + file + " to " + new_name)  # Print to console what is happening
     shutil.move(file, new_file)  # Rename the file
     return new_file  # Return the new path to the file
+
+
+def ensure_directory_exists(directory_path: str) -> None:
+    """
+    Ensures that a directory exists, and creates it if it does not
+
+    :param directory_path: the path to the directory to ensure the existence of.
+    :return: None
+    """
+    if not os.path.isdir(directory_path):
+        os.makedirs(directory_path)
+
+
+def ensure_file_exists(file_path: str) -> None:
+    """
+    Ensures that a file exists, and creates it if it does not
+
+    :param file_path: the path to the file to ensure the existence of.
+    :return: None
+    """
+    if not os.path.isfile(file_path):
+        open(file_path, 'w').close()
