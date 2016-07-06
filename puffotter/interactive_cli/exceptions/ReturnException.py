@@ -25,7 +25,7 @@ LICENSE
 
 class ReturnException(BaseException):
     """
-    This class models an Exception that gets raised by the GenericCli when the user
+    This class models an Exception that gets raised by the PuffOtterCli when the user
     enters a command which will result in exiting the current CLI.
     """
     pass

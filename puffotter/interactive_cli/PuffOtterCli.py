@@ -24,7 +24,7 @@ LICENSE
 
 # imports
 import sys
-from tok_tokkie.modules.cli.exceptions.ReturnException import ReturnException
+from puffotter.interactive_cli.exceptions.ReturnException import ReturnException
 
 # Try to import readline, this makes using the CLI much nicer, it is not supported on Windows however
 try:
@@ -33,7 +33,7 @@ except ImportError:
     readline = None
 
 
-class GenericCli(object):
+class PuffOtterCli(object):
     """
     Class that defines how a CLI has to react.
     It defines interface structures to somewhat standardize the methods how
@@ -49,7 +49,7 @@ class GenericCli(object):
     # parent is actually a GenericCli object
     def __init__(self, parent=None) -> None:
         """
-        Constructor of the GenericCli Class
+        Constructor of the PuffOtterCli Class
 
         Creates a new CLI object. It has the option to store a reference
         to a parent CLI as a local variable.
@@ -58,7 +58,7 @@ class GenericCli(object):
         when the stop() method is called. Otherwise, the program will end.
 
         :param parent: The parent CLI to which the CLI can return to.
-                        It is a GenericCli object.
+                       It is a PuffOtterCli object.
         :return: None
         """
         self.parent = parent
@@ -85,7 +85,7 @@ class GenericCli(object):
                 self.mainloop()
 
         except ReturnException:
-            # The print call generates a new empty line as a seperator.
+            # The print call generates a new empty line as a separator.
             # This is purely aesthetical.
             print()
             # Stops the CLI
