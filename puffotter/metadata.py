@@ -37,7 +37,7 @@ project_description = "A python library to de-clutter other projects"
 A short description of the project
 """
 
-version_number = "0.1.1"
+version_number = "0.1.5"
 """
 The current version of the program.
 """
