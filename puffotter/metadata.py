@@ -42,7 +42,7 @@ version_number = "0.1.5"
 The current version of the program.
 """
 
-development_status = "Development Status :: 1 - Planning"
+development_status = "Development Status :: 2 - Pre-Alpha"
 """
 The current development status of the program
 """
