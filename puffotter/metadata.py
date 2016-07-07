@@ -73,14 +73,9 @@ license_type = "GNU GPL3"
 The project's license type
 """
 
-python3_requirements = []
+dependencies = []
 """
 Python 3 Python Packaging Index requirements
-"""
-
-python2_requirements = []
-"""
-Python 2 Python Packaging Index requirements
 """
 
 audience = "Intended Audience :: Developers"
@@ -93,9 +88,10 @@ environment = "Environment :: Other Environment"
 The intended environment in which the program will be used
 """
 
-programming_language = 'Programming Language :: Python :: 3'
+programming_languages = ['Programming Language :: Python :: 3',
+                         'Programming Language :: Python :: 2']
 """
-The programming language used in this project
+The programming languages used in this project
 """
 
 topic = "Topic :: Utilities"
