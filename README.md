@@ -40,6 +40,6 @@ on both services are taken unto consideration.
 Sphinx Documentation can be found [here](http://krumreyh.eu/puffotter/documentation/html/index.html).
 A [PDF version](http://krumreyh.eu/puffotter/documentation/documentation.pdf) is also available
 
-# Statistics
+## Statistics
 
 Automatically generated git statistics can be found [here](http://krumreyh.eu/puffotter/git_stats/index.html)
