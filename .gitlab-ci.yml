@@ -69,7 +69,7 @@ generate_statistics:
       - git_stats
 
 upload_docstats:
-  stage: docstats:
+  stage: docstats
   only:
     - master
     - develop
