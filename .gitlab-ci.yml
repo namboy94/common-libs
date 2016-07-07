@@ -1,13 +1,8 @@
 stages:
-  - setup
   - mirror
   - test
   - deploy
-
-environment_check:
-  stage: setup
-  script:
-    - pip3 install wheel --user
+  - docstats
 
 mirror_repo:
   stage: mirror
@@ -46,3 +41,42 @@ binary_2_dist:
   script:
     - 3to2 . --write
     - python2 setup.py bdist_wheel upload
+
+generate_documentation:
+  stage: docstats
+  only:
+    - master
+    - develop
+  script:
+    - cd doc
+    - make buildsource
+    - make html
+    - make latexpdf
+  artifacts:
+    paths:
+      - doc/build/html
+      - doc/build/latex/puffotter.pdf
+
+generate_statistics:
+  stage: docstats
+  only:
+    - master
+    - develop
+  script:
+    - gitstats . git_stats
+  artifacts:
+    paths:
+      - git_stats
+
+upload_docstats:
+  stage: docstats:
+  only:
+    - master
+    - develop
+  script:
+    - git clone git@gitlab.namibsun.net:/namboy94/puffotter.wiki
+    - cd puffotter.wiki
+    - mv ../doc/build/html .
+    - mv ../git_stats .
+    - mv ../doc/build/latex/puffotter.pdf .
+
