@@ -1,7 +1,14 @@
 stages:
+  - setup
   - mirror
   - test
   - deploy
+
+environment_check:
+  stage: setup
+  script:
+    - pip3 install 3to2 --user
+    - pip3 install wheel --user
 
 clone_repo:
   stage: mirror
@@ -25,3 +32,6 @@ upload_to_pypi:
     - master
   script:
     - python3 setup.py register sdist upload
+    - python3 setup.py bdist_wheel upload
+    - 3to2 . --write
+    - python2 setup.py bdist_wheel upload
