@@ -224,6 +224,7 @@ dummy:
 	@echo
 	@echo "Build finished. Dummy builder generates no files."
 
+# Run sphinx-apidoc -f ../puffotter -o source the first time to generate modules.rst
 buildsource:
 	sphinx-apidoc -fMeET ../puffotter -o source
 	@echo "Auto-generation of API documentation finished. " \
