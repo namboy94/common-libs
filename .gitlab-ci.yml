@@ -47,7 +47,6 @@ generate_documentation:
   only:
     - master
     - develop
-    - ci-debug
   script:
     - cd doc
     - make buildsource
@@ -65,7 +64,6 @@ generate_statistics:
   only:
     - master
     - develop
-    - ci-debug
   script:
     - gitstats . git_stats
     - rsync -av git_stats/ www.krumreyh.com@ssh.strato.de:~/programming_pages/puffotter/git_stats --delete-after
