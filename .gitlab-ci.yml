@@ -7,10 +7,9 @@ stages:
 environment_check:
   stage: setup
   script:
-    - pip3 install 3to2 --user
     - pip3 install wheel --user
 
-clone_repo:
+mirror_repo:
   stage: mirror
   only:
     - master
@@ -26,12 +25,24 @@ run_unit_tests:
   script:
     - python3 setup.py test
 
-upload_to_pypi:
+source_dist:
   stage: deploy
   only:
     - master
   script:
     - python3 setup.py register sdist upload
+
+binary_3_dist:
+  stage: deploy
+  only:
+    - master
+  script:
     - python3 setup.py bdist_wheel upload
+
+binary_2_dist:
+  stage: deploy
+  only:
+    - master
+  script:
     - 3to2 . --write
     - python2 setup.py bdist_wheel upload
