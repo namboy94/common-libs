@@ -47,11 +47,14 @@ generate_documentation:
   only:
     - master
     - develop
+    - ci-debug
   script:
     - cd doc
     - make buildsource
     - make html
     - make latexpdf
+    - rsync -av build/html/ www.krumreyh.com@ssh.strato.de:~/programming_pages/puffotter/documentation/html --delete-after
+    - rsync -av build/latex/puffotter.pdf www.krumreyh.com@ssh.strato.de:~/programming_pages/puffotter/documentation/documentation.pdf --delete-after
   artifacts:
     paths:
       - doc/build/html
@@ -62,21 +65,11 @@ generate_statistics:
   only:
     - master
     - develop
+    - ci-debug
   script:
     - gitstats . git_stats
+    - rsync -av git_stats/ www.krumreyh.com@ssh.strato.de:~/programming_pages/puffotter/git_stats --delete-after
   artifacts:
     paths:
       - git_stats
-
-upload_docstats:
-  stage: docstats
-  only:
-    - master
-    - develop
-  script:
-    - git clone git@gitlab.namibsun.net:/namboy94/puffotter.wiki
-    - cd puffotter.wiki
-    - mv ../doc/build/html .
-    - mv ../git_stats .
-    - mv ../doc/build/latex/puffotter.pdf .
 
