@@ -1,9 +1,7 @@
 import sys
 import os
-
-from puffotter.metadata import version_number
-
 sys.path.insert(0, os.path.abspath("../.."))
+from puffotter.metadata import version_number
 
 extensions = [
     'sphinx.ext.autodoc',
