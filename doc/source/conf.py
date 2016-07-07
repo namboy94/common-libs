@@ -1,4 +1,9 @@
+import sys
+import os
+
 from puffotter.metadata import version_number
+
+sys.path.insert(0, os.path.abspath("../.."))
 
 extensions = [
     'sphinx.ext.autodoc',
@@ -52,3 +57,23 @@ epub_author = author
 epub_publisher = author
 epub_copyright = copyright
 epub_exclude_files = ['search.html']
+
+
+# Example configuration for intersphinx: refer to the Python standard library.
+intersphinx_mapping = {'https://docs.python.org/': None}
+
+from sphinx.ext.autodoc import between
+
+
+def skip(app, what, name, obj, skip, options):
+    if name == "__init__":
+        return False
+    return skip
+
+
+def setup(app):
+    # Register a sphinx.ext.autodoc.between listener to ignore everything
+    # between lines that contain the word IGNORE
+    app.connect('autodoc-process-docstring', between('^.*LICENSE.*$', exclude=True))
+    app.connect("autodoc-skip-member", skip)
+    return app
