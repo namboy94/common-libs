@@ -98,12 +98,9 @@ def ensure_sqlite3_db_exists(database_path: str, initialization: str = None, del
         try:
             with open(database_path, 'rb') as database:
                 header = database.read(100)
-                print(header)
                 file_exists_and_is_not_database = header[:16] != b'SQLite format 3\x00'
         except IndexError:
             file_exists_and_is_not_database = True
-
-    print(file_exists_and_is_not_database)
 
     if file_exists_and_is_not_database and delete_existing_file:
         os.remove(database_path)
