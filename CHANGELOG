@@ -1,3 +1,5 @@
+V 0.1.8
+  - Added SQLite 3 Database existence checker
 V 0.1.7
   - Fixed python 2 distribution
 V 0.1.6
