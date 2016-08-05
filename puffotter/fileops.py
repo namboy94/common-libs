@@ -26,6 +26,7 @@ LICENSE
 # imports
 import os
 import shutil
+import sqlite3
 
 
 def move_file(file: str, location: str) -> str:
@@ -80,3 +81,35 @@ def ensure_file_exists(file_path: str) -> None:
     """
     if not os.path.isfile(file_path):
         open(file_path, 'w').close()
+
+
+def ensure_sqlite3_db_exists(database_path: str, initialization: str = None, delete_existing_file: bool = False) -> None:
+    """
+    Ensures that an SQLite 3 database exists
+    :param database_path: the path to the database file
+    :param initialization: The initialization command of the database
+    :param delete_existing_file: If there is already a file at that location, this can be set to replace
+            the existing file with an SQLite database
+    :return: None
+    """
+    file_exists_and_is_not_database = False
+
+    if os.path.isfile(database_path):
+        try:
+            with open(database_path, 'rb') as database:
+                header = database.read(100)
+                file_exists_and_is_not_database = header[:16] != b'SQLite format 3\x00'
+        except IndexError:
+            file_exists_and_is_not_database = True
+
+    if file_exists_and_is_not_database and delete_existing_file:
+        os.remove(database_path)
+
+    if not os.path.isfile(database_path):
+        sql = sqlite3.connect(database_path)
+
+        if initialization is not None:
+            sql.execute(initialization)
+            sql.commit()
+
+        sql.close()
