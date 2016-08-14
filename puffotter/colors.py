@@ -27,7 +27,43 @@ class Colors(object):
     """
     Class that offers the ANSI Color code escape sequences
     """
-    BLUE = '\033[94m'
+    # Foregrounds
+    DEFAULT_FG = '\033[39m'
+    BLACK_FG = '\033[30m'
+    RED_FG = '\033[31m'
+    GREEN_FG = '\033[32m'
+    YELLOW_FG = '\033[33m'
+    BLUE_FG = '\033[34m'
+    MAGENTA_FG = '\033[35m'
+    CYAN_FG = '\033[36m'
+    LIGHT_GRAY_FG = '\033[37m'
+    DARK_GRAY_FG = '\033[90m'
+    LIGHT_RED_FG = '\033[91m'
+    LIGHT_GREEN_FG = '\033[92m'
+    LIGHT_YELLOW_FG = '\033[93m'
+    LIGHT_BLUE_FG = '\033[94m'
+    LIGHT_MAGENTA_FG = '\033[95m'
+    LIGHT_CYAN_FG = '\033[96m'
+    WHITE_FG = '\033[97m'
+
+    # Backgrounds
+    DEFAULT_BG = '\033[49m'
+    BLACK_BG = '\033[40m'
+    RED_BG = '\033[41m'
+    GREEN_BG = '\033[42m'
+    YELLOW_BG = '\033[43m'
+    BLUE_BG = '\033[44m'
+    MAGENTA_BG = '\033[45m'
+    CYAN_BG = '\033[46m'
+    LIGHT_GRAY_BG = '\033[47m'
+    DARK_GRAY_BG = '\033[100m'
+    LIGHT_RED_BG = '\033[101m'
+    LIGHT_GREEN_BG = '\033[102m'
+    LIGHT_YELLOW_BG = '\033[103m'
+    LIGHT_BLUE_BG = '\033[104m'
+    LIGHT_MAGENTA_BG = '\033[105m'
+    LIGHT_CYAN_BG = '\033[106m'
+    WHITE_BG = '\033[107m'
 
 escape = '\033[0m'
 """
