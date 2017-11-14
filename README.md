@@ -1,8 +1,8 @@
-# Etosha Safari [![pipeline status](https://gitlab.namibsun.net/namboy94/common-libs/badges/master/pipeline.svg)](https://gitlab.namibsun.net/namboy94/common-libs/commits/master)
+# Common Libs [![pipeline status](https://gitlab.namibsun.net/namboy94/common-libs/badges/master/pipeline.svg)](https://gitlab.namibsun.net/namboy94/common-libs/commits/master)
 
 ![Logo](resources/logo/logo-readme.png)
 
-
+This repository contains two former Java projects that aimed at being a library for common operations.
 
 ## Further Information
 
