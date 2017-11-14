@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/common-libs.iml" filepath="$PROJECT_DIR$/.idea/common-libs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/common-libs.iml" filepath="$PROJECT_DIR$/.idea/common-libs.iml" />
     </modules>
   </component>
 </project>
