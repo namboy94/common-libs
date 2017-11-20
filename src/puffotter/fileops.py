@@ -108,3 +108,17 @@ def ensure_sqlite3_db_exists(database_path: str, initialization: str = None, del
             sql.commit()
 
         sql.close()
+
+
+def sanitize_filename(filename: str) -> str:
+    """
+    Sanitizes a filename to avoid file system errors
+
+    :param filename: the filename to sanitize
+    :return:         the sanitized filename
+    """
+    sanitized = filename
+    illegal_characters = ['/', '\\', '?', '<', '>', ':', '*', '|', "\"", '^']
+    for illegal_character in illegal_characters:
+        sanitized = sanitized.replace(illegal_character, "")
+    return sanitized
