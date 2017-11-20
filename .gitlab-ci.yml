@@ -60,16 +60,3 @@ generate_documentation:
     paths:
       - doc/build/html
       - doc/build/latex/puffotter.pdf
-
-generate_statistics:
-  stage: docstats
-  only:
-    - master
-    - develop
-  script:
-    - gitstats . git_stats
-    - rsync -av git_stats/ www.krumreyh.com@ssh.strato.de:~/programming_pages/puffotter/git_stats --delete-after
-  artifacts:
-    paths:
-      - git_stats
-
