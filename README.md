@@ -1,4 +1,6 @@
-# Common Libs [![pipeline status](https://gitlab.namibsun.net/namboy94/common-libs/badges/master/pipeline.svg)](https://gitlab.namibsun.net/namboy94/common-libs/commits/master)
+# Common Libs
+
+[![pipeline status](https://gitlab.namibsun.net/namibsun/museum/common-libs/badges/master/pipeline.svg)](https://gitlab.namibsun.net/namibsun/museum/common-libs/commits/master)
 
 ![Logo](resources/logo/logo-readme.png)
 
